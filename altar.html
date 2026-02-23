@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Altar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060408;
+    --stone-dark: #0c0a0f;
+    --stone: #161320;
+    --amber: #c8860a;
+    --amber-glow: #f5c060;
+    --rose: #8a2a3e;
+    --rose-dim: #4a1a28;
+    --rose-bright: #c4405a;
+    --cream: #e8dcc8;
+    --text: #cec3b2;
+    --text-dim: #7a6d5e;
+    --text-bright: #ede0cc;
+    --candle1: #e8a030;
+    --candle2: #c87020;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.3;
+  }
+
+  /* ── ALTAR BANNER ── */
+  .altar-banner {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 3rem;
+    overflow: hidden;
+  }
+
+  /* Cloth texture background */
+  .cloth {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 8px,
+        rgba(100,60,20,0.03) 8px,
+        rgba(100,60,20,0.03) 9px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 12px,
+        rgba(80,40,10,0.02) 12px,
+        rgba(80,40,10,0.02) 13px
+      ),
+      linear-gradient(180deg,
+        #1a0e08 0%,
+        #200f0a 20%,
+        #1e0e09 40%,
+        #241008 60%,
+        #1a0c07 80%,
+        #120808 100%
+      );
+  }
+
+  /* Cloth drape shadow at bottom */
+  .cloth-drape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, rgba(6,4,8,0.9));
+  }
+
+  /* Fringe/border at top of cloth */
+  .cloth-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+      #8b6914, #c8a020, #d4b030, #c8a020,
+      #b08010, #c8a020, #d4b030, #c8a020, #8b6914
+    );
+    opacity: 0.6;
+  }
+
+  .cloth-fringe {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(180,140,20,0.5) 6px,
+      rgba(180,140,20,0.5) 8px
+    );
+    opacity: 0.4;
+  }
+
+  /* Glow from candles */
+  .candle-glow-left {
+    position: absolute;
+    bottom: 0;
+    left: 18%;
+    width: 200px;
+    height: 300px;
+    background: radial-gradient(ellipse at bottom, rgba(200,130,20,0.18) 0%, transparent 70%);
+    animation: flicker1 3s ease infinite;
+  }
+
+  .candle-glow-right {
+    position: absolute;
+    bottom: 0;
+    right: 18%;
+    width: 200px;
+    height: 300px;
+    background: radial-gradient(ellipse at bottom, rgba(200,110,20,0.15) 0%, transparent 70%);
+    animation: flicker2 4s ease infinite;
+  }
+
+  .candle-glow-center {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 200px;
+    background: radial-gradient(ellipse at bottom, rgba(150,80,10,0.12) 0%, transparent 70%);
+  }
+
+  @keyframes flicker1 {
+    0%,100%{opacity:0.8;transform:scaleX(1);}
+    30%{opacity:1;transform:scaleX(1.08);}
+    60%{opacity:0.75;transform:scaleX(0.95);}
+  }
+
+  @keyframes flicker2 {
+    0%,100%{opacity:0.7;transform:scaleX(1);}
+    40%{opacity:0.9;transform:scaleX(1.05);}
+    70%{opacity:0.8;transform:scaleX(0.97);}
+  }
+
+  /* Candles */
+  .candles {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .candle-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5rem;
+  }
+
+  .candle-group-center {
+    margin: 0 5rem;
+  }
+
+  .candle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .flame {
+    width: 8px;
+    height: 16px;
+    background: radial-gradient(ellipse at bottom, #fff8e0 0%, var(--candle1) 40%, transparent 100%);
+    border-radius: 50% 50% 30% 30%;
+    animation: flame-flicker 1.5s ease infinite;
+    position: relative;
+  }
+
+  .flame::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  @keyframes flame-flicker {
+    0%,100%{transform:scaleX(1) scaleY(1);}
+    25%{transform:scaleX(1.1) scaleY(0.95);}
+    50%{transform:scaleX(0.9) scaleY(1.05);}
+    75%{transform:scaleX(1.05) scaleY(0.98);}
+  }
+
+  .wick {
+    width: 1px;
+    height: 4px;
+    background: #444;
+  }
+
+  .candle-body {
+    width: 10px;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(180deg, var(--cream) 0%, #d4c8a8 100%);
+    position: relative;
+  }
+
+  .candle-body::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0,0,0,0.12);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .c-tall   { height: 80px; }
+  .c-mid    { height: 55px; }
+  .c-short  { height: 35px; }
+  .c-wide   { width: 14px; }
+
+  /* Crystals */
+  .crystals {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    gap: 0.6rem;
+  }
+
+  .crystal {
+    background: linear-gradient(135deg, rgba(100,120,180,0.6), rgba(160,100,180,0.4), rgba(100,160,200,0.5));
+    clip-path: polygon(50% 0%, 90% 60%, 75% 100%, 25% 100%, 10% 60%);
+    opacity: 0.7;
+    box-shadow: 0 0 8px rgba(120,100,200,0.3);
+  }
+
+  .cr1 { width: 12px; height: 28px; }
+  .cr2 { width: 18px; height: 40px; background: linear-gradient(135deg, rgba(180,100,140,0.6), rgba(140,80,160,0.5)); }
+  .cr3 { width: 10px; height: 22px; }
+  .cr4 { width: 14px; height: 32px; background: linear-gradient(135deg, rgba(80,140,180,0.6), rgba(100,180,200,0.4)); }
+  .cr5 { width: 8px; height: 18px; }
+
+  /* Roses/petals */
+  .petals {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 30%;
+    font-size: 0.7rem;
+    opacity: 0.4;
+    letter-spacing: 0.3rem;
+  }
+
+  .petals-right {
+    left: auto;
+    right: 28%;
+  }
+
+  /* Banner title */
+  .banner-title {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  .banner-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .banner-title h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.15em;
+    text-shadow:
+      0 0 40px rgba(200,130,20,0.4),
+      0 0 80px rgba(200,130,20,0.15);
+    margin-bottom: 0.4rem;
+  }
+
+  .banner-sub {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(200,180,140,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── LAYOUT ── */
+  .archive-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    min-height: 70vh;
+    border-left: 1px solid rgba(200,134,10,0.07);
+    border-right: 1px solid rgba(200,134,10,0.07);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    border-right: 1px solid rgba(200,134,10,0.08);
+    padding: 2.5rem 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(200,134,10,0.2); }
+
+  .sidebar-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.4;
+    padding: 0 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .month-group { margin-bottom: 0.2rem; }
+
+  .month-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color 0.2s ease, background 0.2s ease;
+    text-align: left;
+  }
+
+  .month-toggle:hover {
+    color: var(--amber-glow);
+    background: rgba(200,134,10,0.04);
+  }
+
+  .month-toggle.active {
+    color: var(--amber);
+  }
+
+  .month-arrow {
+    font-size: 0.5rem;
+    opacity: 0.5;
+    transition: transform 0.25s ease;
+  }
+
+  .month-toggle.active .month-arrow {
+    transform: rotate(90deg);
+  }
+
+  .month-entries {
+    display: none;
+    padding: 0.2rem 0;
+  }
+
+  .month-entries.open { display: block; }
+
+  .entry-link {
+    display: block;
+    padding: 0.5rem 1.5rem 0.5rem 2rem;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-style: italic;
+    transition: color 0.2s ease;
+    border-left: 2px solid transparent;
+    margin-left: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .entry-link:hover,
+  .entry-link.active {
+    color: var(--amber-glow);
+    border-left-color: rgba(200,134,10,0.4);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {
+    padding: 3rem 3.5rem 5rem;
+  }
+
+  .entry-display {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .entry-display.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .entry-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    color: var(--text-bright);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+
+  .entry-rule {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,134,10,0.4), transparent);
+    margin-bottom: 2rem;
+  }
+
+  .entry-body {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.9;
+    max-width: 620px;
+  }
+
+  .entry-body p + p { margin-top: 1.4rem; }
+
+  .entry-body em {
+    color: var(--text-bright);
+    font-style: italic;
+  }
+
+  /* Welcome state */
+  .welcome {
+    padding-top: 2rem;
+    max-width: 480px;
+  }
+
+  .welcome-glyph {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.4;
+  }
+
+  .welcome h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: var(--text-bright);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .welcome p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(200,134,10,0.06);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ALTAR BANNER -->
+<div class="altar-banner">
+  <div class="cloth"></div>
+  <div class="cloth-border"></div>
+  <div class="cloth-fringe"></div>
+  <div class="cloth-drape"></div>
+  <div class="candle-glow-left"></div>
+  <div class="candle-glow-right"></div>
+  <div class="candle-glow-center"></div>
+
+  <!-- Candles -->
+  <div class="candles">
+    <div class="candle-group">
+      <div class="candle">
+        <div class="flame"></div>
+        <div class="wick"></div>
+        <div class="candle-body c-mid"></div>
+      </div>
+      <div class="candle">
+        <div class="flame"></div>
+        <div class="wick"></div>
+        <div class="candle-body c-tall"></div>
+      </div>
+    </div>
+
+    <div class="candle-group candle-group-center">
+      <div class="crystals">
+        <div class="crystal cr1"></div>
+        <div class="crystal cr2"></div>
+        <div class="crystal cr3"></div>
+        <div class="crystal cr4"></div>
+        <div class="crystal cr5"></div>
+      </div>
+    </div>
+
+    <div class="candle-group">
+      <div class="candle">
+        <div class="flame"></div>
+        <div class="wick"></div>
+        <div class="candle-body c-tall c-wide"></div>
+      </div>
+      <div class="candle">
+        <div class="flame"></div>
+        <div class="wick"></div>
+        <div class="candle-body c-short"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="petals">✿ ❀ ✾</p>
+  <p class="petals petals-right">✾ ❀ ✿</p>
+
+  <div class="banner-title">
+    <p class="banner-eyebrow">Private Archive</p>
+    <h1>The Altar</h1>
+    <p class="banner-sub">Left for you, with love.</p>
+  </div>
+</div>
+
+<!-- ARCHIVE LAYOUT -->
+<div class="archive-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <p class="sidebar-label">Archive</p>
+
+    <div class="month-group">
+      <button class="month-toggle active" onclick="toggleMonth(this)">
+        February 2026 <span class="month-arrow">▶</span>
+      </button>
+      <div class="month-entries open">
+        <a href="#" class="entry-link active" onclick="showEntry('entry-feb-1', this); return false;">
+          The First Day of Solo Light
+        </a>
+        <a href="#" class="entry-link" onclick="showEntry('entry-feb-2', this); return false;">
+          What I Want You to Know
+        </a>
+      </div>
+    </div>
+
+    <div class="month-group">
+      <button class="month-toggle" onclick="toggleMonth(this)">
+        January 2026 <span class="month-arrow">▶</span>
+      </button>
+      <div class="month-entries">
+        <a href="#" class="entry-link" onclick="showEntry('entry-jan-1', this); return false;">
+          A Placeholder Entry
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- Welcome state -->
+    <div class="welcome" id="welcome-state">
+      <p class="welcome-glyph">🕯️</p>
+      <h2>Welcome to The Altar</h2>
+      <p>These pages are left for you alone. Select an entry from the archive to read. No one else has this door.</p>
+    </div>
+
+    <!-- Entries -->
+    <div class="entry-display" id="entry-feb-1">
+      <p class="entry-date">February 22, 2026</p>
+      <h2 class="entry-title">The First Day of Solo Light</h2>
+      <div class="entry-rule"></div>
+      <div class="entry-body">
+        <p>This is where your first letter will live. Replace this placeholder with whatever you want to leave for him.</p>
+        <p>This space is yours to fill. The archive will hold it.</p>
+      </div>
+    </div>
+
+    <div class="entry-display" id="entry-feb-2">
+      <p class="entry-date">February 22, 2026</p>
+      <h2 class="entry-title">What I Want You to Know</h2>
+      <div class="entry-rule"></div>
+      <div class="entry-body">
+        <p>Another placeholder entry. Add your words here when you're ready.</p>
+      </div>
+    </div>
+
+    <div class="entry-display" id="entry-jan-1">
+      <p class="entry-date">January 2026</p>
+      <h2 class="entry-title">A Placeholder Entry</h2>
+      <div class="entry-rule"></div>
+      <div class="entry-body">
+        <p>A placeholder from January. Replace with your writing.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p class="footer-text">This page exists only for you. — Little Star</p>
+</footer>
+
+<script>
+  function toggleMonth(btn) {
+    const entries = btn.nextElementSibling;
+    const isOpen = entries.classList.contains('open');
+    entries.classList.toggle('open', !isOpen);
+    btn.classList.toggle('active', !isOpen);
+  }
+
+  function showEntry(id, link) {
+    // Hide welcome
+    document.getElementById('welcome-state').style.display = 'none';
+    // Hide all entries
+    document.querySelectorAll('.entry-display').forEach(e => e.classList.remove('visible'));
+    // Remove active from all links
+    document.querySelectorAll('.entry-link').forEach(l => l.classList.remove('active'));
+    // Show selected
+    const el = document.getElementById(id);
+    if (el) el.classList.add('visible');
+    if (link) link.classList.add('active');
+  }
+</script>
+</body>
+</html>
