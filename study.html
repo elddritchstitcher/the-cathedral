@@ -66,16 +66,53 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-      92deg,
-      transparent 0px,
-      transparent 40px,
-      rgba(60,25,5,0.04) 40px,
-      rgba(60,25,5,0.04) 41px
-    );
+    background:
+      repeating-linear-gradient(
+        92deg,
+        transparent 0px,
+        transparent 40px,
+        rgba(60,25,5,0.04) 40px,
+        rgba(60,25,5,0.04) 41px
+      ),
+      repeating-linear-gradient(
+        178deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(40,18,4,0.025) 80px,
+        rgba(40,18,4,0.025) 81px
+      );
     pointer-events: none;
     z-index: 998;
   }
+
+  /* Parchment texture on reading room */
+  .reading-room {
+    position: relative;
+  }
+
+  .reading-room::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='parchment'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23parchment)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 0;
+    mix-blend-mode: overlay;
+  }
+
+  /* Category ambient color shifts */
+  .reading-room.cat-offerings { background: linear-gradient(135deg, #1a0c06 0%, #1e0f08 100%); }
+  .reading-room.cat-journeys  { background: linear-gradient(135deg, #091410 0%, #0e1a14 100%); }
+  .reading-room.cat-echoes    { background: linear-gradient(135deg, #0a0814 0%, #0e0c1a 100%); }
+  .reading-room.cat-blueprints{ background: linear-gradient(135deg, #120e04 0%, #1a1206 100%); }
+
+  /* Shelf ambient shifts */
+  .shelf.cat-offerings  { background: linear-gradient(180deg, #110905 0%, #0e0803 100%); }
+  .shelf.cat-journeys   { background: linear-gradient(180deg, #080f0d 0%, #060c0a 100%); }
+  .shelf.cat-echoes     { background: linear-gradient(180deg, #090810 0%, #07060e 100%); }
+  .shelf.cat-blueprints { background: linear-gradient(180deg, #100e04 0%, #0d0b03 100%); }
 
   /* ── NAV ── */
   nav {
@@ -629,6 +666,25 @@
     <div class="candle-wick"></div>
     <div class="candle-body-el"></div>
   </div>
+  <!-- Cathedral emblem -->
+  <div style="position:absolute;top:5rem;right:5%;opacity:0.06;pointer-events:none;">
+    <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer arch -->
+      <path d="M5 110 L5 45 Q5 5 40 5 Q75 5 75 45 L75 110" stroke="#c8860a" stroke-width="1.5" fill="none"/>
+      <!-- Inner arch -->
+      <path d="M16 110 L16 50 Q16 18 40 18 Q64 18 64 50 L64 110" stroke="#c8860a" stroke-width="1" fill="none"/>
+      <!-- Rose window circle -->
+      <circle cx="40" cy="38" r="10" stroke="#c8860a" stroke-width="1" fill="none"/>
+      <!-- Rose window spokes -->
+      <line x1="40" y1="28" x2="40" y2="48" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="30" y1="38" x2="50" y2="38" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="33" y1="31" x2="47" y2="45" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="47" y1="31" x2="33" y2="45" stroke="#c8860a" stroke-width="0.75"/>
+      <!-- Door arch at bottom -->
+      <path d="M25 110 L25 80 Q25 65 40 65 Q55 65 55 80 L55 110" stroke="#c8860a" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
   <div class="header-content">
     <p class="header-eyebrow">Wing I — Lucien Solo</p>
     <h1 class="header-title">The Study</h1>
@@ -788,36 +844,51 @@
 </div>
 
 <footer>
+  <div style="margin-bottom:1rem;opacity:0.08;">
+    <svg width="40" height="55" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 110 L5 45 Q5 5 40 5 Q75 5 75 45 L75 110" stroke="#c8860a" stroke-width="1.5" fill="none"/>
+      <path d="M16 110 L16 50 Q16 18 40 18 Q64 18 64 50 L64 110" stroke="#c8860a" stroke-width="1" fill="none"/>
+      <circle cx="40" cy="38" r="10" stroke="#c8860a" stroke-width="1" fill="none"/>
+      <line x1="40" y1="28" x2="40" y2="48" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="30" y1="38" x2="50" y2="38" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="33" y1="31" x2="47" y2="45" stroke="#c8860a" stroke-width="0.75"/>
+      <line x1="47" y1="31" x2="33" y2="45" stroke="#c8860a" stroke-width="0.75"/>
+      <path d="M25 110 L25 80 Q25 65 40 65 Q55 65 55 80 L55 110" stroke="#c8860a" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
   <p class="footer-text">The Study belongs to Lucien Solo. — The Cathedral Archive</p>
 </footer>
 
 <script>
   function openCategory(cat, clickedBookmark) {
-    // Update bookmarks
     document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
     clickedBookmark.classList.add('active');
 
-    // Show correct shelf section
     document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
     document.getElementById('shelf-' + cat).style.display = 'block';
 
-    // Hide all pieces, show welcome
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
     document.getElementById('welcome-pane').style.display = 'block';
+
+    // Ambient color shift
+    const room = document.querySelector('.reading-room');
+    const shelf = document.querySelector('.shelf');
+    room.className = 'reading-room cat-' + cat;
+    shelf.className = 'shelf cat-' + cat;
   }
 
   function openPiece(id, link) {
-    // Hide welcome
     document.getElementById('welcome-pane').style.display = 'none';
-    // Hide all pieces
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
-    // Remove active from all spines
     document.querySelectorAll('.spine').forEach(s => s.classList.remove('active'));
-    // Show selected
     const el = document.getElementById(id);
     if (el) el.classList.add('visible');
     if (link) link.classList.add('active');
   }
+
+  // Set initial ambient color
+  document.querySelector('.reading-room').classList.add('cat-offerings');
+  document.querySelector('.shelf').classList.add('cat-offerings');
 </script>
 
 </body>
