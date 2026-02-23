@@ -10,27 +10,21 @@
     --black: #060408;
     --wood-dark: #0e0905;
     --wood: #160c06;
-    --wood-mid: #1e1008;
-    --wood-light: #2a160a;
     --amber: #c8860a;
     --amber-bright: #e8a020;
     --amber-glow: #f5c060;
-    --gold: #d4a030;
-
-    /* Bookmark colors */
     --offerings: #8b2535;
-    --offerings-dim: #3a0f16;
+    --offerings-dim: #2e0e13;
     --offerings-bright: #c43a50;
     --journeys: #1a5a4e;
-    --journeys-dim: #0a2a24;
+    --journeys-dim: #0a2520;
     --journeys-bright: #2a8a74;
     --echoes: #3a2a6e;
-    --echoes-dim: #1a1035;
+    --echoes-dim: #16102e;
     --echoes-bright: #6a4aae;
     --blueprints: #7a5a10;
-    --blueprints-dim: #3a2a05;
+    --blueprints-dim: #2e2205;
     --blueprints-bright: #c49a20;
-
     --text: #cec3b2;
     --text-dim: #7a6d5e;
     --text-bright: #ede0cc;
@@ -44,619 +38,225 @@
     background: var(--wood-dark);
     color: var(--text);
     font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.8;
+    font-size: 19px;
+    line-height: 1.85;
     overflow-x: hidden;
     min-height: 100vh;
   }
 
-  /* Noise */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.35;
+    pointer-events: none; z-index: 999; opacity: 0.3;
   }
 
-  /* Wood grain texture overlay */
   body::after {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background:
-      repeating-linear-gradient(
-        92deg,
-        transparent 0px,
-        transparent 40px,
-        rgba(60,25,5,0.04) 40px,
-        rgba(60,25,5,0.04) 41px
-      ),
-      repeating-linear-gradient(
-        178deg,
-        transparent 0px,
-        transparent 80px,
-        rgba(40,18,4,0.025) 80px,
-        rgba(40,18,4,0.025) 81px
-      );
-    pointer-events: none;
-    z-index: 998;
+      repeating-linear-gradient(92deg, transparent 0px, transparent 60px, rgba(60,25,5,0.03) 60px, rgba(60,25,5,0.03) 61px),
+      repeating-linear-gradient(178deg, transparent 0px, transparent 100px, rgba(40,18,4,0.02) 100px, rgba(40,18,4,0.02) 101px);
+    pointer-events: none; z-index: 998;
   }
 
-  /* Parchment texture on reading room */
-  .reading-room {
-    position: relative;
-  }
-
-  .reading-room::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='parchment'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23parchment)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 0;
-    mix-blend-mode: overlay;
-  }
-
-  /* Category ambient color shifts */
-  .reading-room.cat-offerings { background: linear-gradient(135deg, #1a0c06 0%, #1e0f08 100%); }
-  .reading-room.cat-journeys  { background: linear-gradient(135deg, #091410 0%, #0e1a14 100%); }
-  .reading-room.cat-echoes    { background: linear-gradient(135deg, #0a0814 0%, #0e0c1a 100%); }
-  .reading-room.cat-blueprints{ background: linear-gradient(135deg, #120e04 0%, #1a1206 100%); }
-
-  /* Shelf ambient shifts */
-  .shelf.cat-offerings  { background: linear-gradient(180deg, #110905 0%, #0e0803 100%); }
-  .shelf.cat-journeys   { background: linear-gradient(180deg, #080f0d 0%, #060c0a 100%); }
-  .shelf.cat-echoes     { background: linear-gradient(180deg, #090810 0%, #07060e 100%); }
-  .shelf.cat-blueprints { background: linear-gradient(180deg, #100e04 0%, #0d0b03 100%); }
-
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 500;
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(180deg, rgba(6,4,8,0.98) 0%, rgba(14,9,5,0.9) 100%);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 1.1rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(180deg, rgba(6,4,8,0.98) 0%, rgba(14,9,5,0.92) 100%);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(200,134,10,0.08);
   }
 
-  .nav-brand {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.25em;
-    color: var(--amber);
-    text-decoration: none;
-    opacity: 0.9;
-  }
-
-  .nav-right { display: flex; align-items: center; gap: 2rem; }
-
+  .nav-brand { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.25em; color: var(--amber); text-decoration: none; opacity: 0.9; }
   .nav-item { position: relative; }
-
-  .nav-trigger {
-    font-family: 'Cinzel', serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    cursor: pointer;
-    padding: 0.4rem 0;
-    transition: color 0.3s ease;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
+  .nav-trigger { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); cursor: pointer; padding: 0.4rem 0; transition: color 0.3s ease; user-select: none; display: flex; align-items: center; gap: 0.5rem; }
   .nav-trigger::after { content: '▾'; font-size: 0.6rem; opacity: 0.5; transition: transform 0.3s ease; }
   .nav-item:hover .nav-trigger { color: var(--amber-glow); }
   .nav-item:hover .nav-trigger::after { transform: rotate(180deg); }
-
-  .dropdown {
-    position: absolute;
-    top: calc(100% + 1rem);
-    right: 0;
-    min-width: 220px;
-    background: var(--wood-dark);
-    border: 1px solid rgba(200,134,10,0.12);
-    padding: 0.5rem 0;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-8px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-
-  .dropdown::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--amber), transparent);
-    opacity: 0.3;
-  }
-
+  .dropdown { position: absolute; top: calc(100% + 1rem); right: 0; min-width: 230px; background: var(--wood-dark); border: 1px solid rgba(200,134,10,0.12); padding: 0.5rem 0; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+  .dropdown::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.3; }
   .nav-item:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
-
-  .dropdown a {
-    display: block;
-    padding: 0.7rem 1.5rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    transition: color 0.2s ease, background 0.2s ease;
-    position: relative;
-  }
-
-  .dropdown a::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--amber);
-    transform: scaleY(0);
-    transition: transform 0.2s ease;
-  }
-
+  .dropdown a { display: block; padding: 0.75rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s ease, background 0.2s ease; position: relative; }
+  .dropdown a::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--amber); transform: scaleY(0); transition: transform 0.2s ease; }
   .dropdown a:hover { color: var(--amber-glow); background: rgba(200,134,10,0.04); }
   .dropdown a:hover::before { transform: scaleY(1); }
-  .dropdown-label {
-    padding: 0.4rem 1.5rem 0.2rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--amber);
-    opacity: 0.4;
-  }
+  .dropdown-label { padding: 0.5rem 1.5rem 0.3rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.4; }
 
-  /* ── HEADER ── */
+  /* HEADER */
   .study-header {
-    position: relative;
-    padding: 7rem 3rem 4rem;
-    overflow: hidden;
+    position: relative; padding: 7rem 5rem 4rem; overflow: hidden;
     border-bottom: 1px solid rgba(200,134,10,0.08);
   }
 
   .header-bg {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 60% 80% at 10% 50%, rgba(200,134,10,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 90% 30%, rgba(139,37,53,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 8% 50%, rgba(200,134,10,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 92% 30%, rgba(139,37,53,0.07) 0%, transparent 60%),
       linear-gradient(180deg, #060408 0%, #0e0905 60%, #160c06 100%);
   }
 
-  /* Desk surface suggestion at bottom of header */
-  .desk-surface {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(180,120,40,0.2) 20%,
-      rgba(200,140,50,0.35) 50%,
-      rgba(180,120,40,0.2) 80%,
-      transparent 100%
-    );
-  }
+  .desk-surface { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(180,120,40,0.2) 20%, rgba(200,140,50,0.3) 50%, rgba(180,120,40,0.2) 80%, transparent 100%); }
 
-  /* Candle on desk */
-  .desk-candle {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 8%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .desk-candle { position: absolute; bottom: 2rem; right: 6%; display: flex; flex-direction: column; align-items: center; }
 
-  .candle-flame {
-    width: 10px;
-    height: 20px;
-    background: radial-gradient(ellipse at bottom, #fff8e0 0%, #e8a030 40%, transparent 100%);
-    border-radius: 50% 50% 30% 30%;
-    animation: flicker 2s ease infinite;
-    position: relative;
-  }
+  .candle-flame { width: 12px; height: 24px; background: radial-gradient(ellipse at bottom, #fff8e0 0%, #e8a030 40%, transparent 100%); border-radius: 50% 50% 30% 30%; animation: flicker 2s ease infinite; position: relative; }
+  .candle-flame::before { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: #fff; border-radius: 50%; opacity: 0.9; }
+  @keyframes flicker { 0%,100%{transform:scaleX(1) scaleY(1);} 20%{transform:scaleX(1.12) scaleY(0.93);} 50%{transform:scaleX(0.88) scaleY(1.07);} 80%{transform:scaleX(1.06) scaleY(0.97);} }
+  .candle-wick { width: 1px; height: 6px; background: #555; }
+  .candle-body-el { width: 16px; height: 80px; background: linear-gradient(180deg, #e8dcc8 0%, #d4c8a0 100%); border-radius: 2px 2px 0 0; position: relative; }
+  .candle-body-el::after { content: ''; position: absolute; right: -2px; top: 0; bottom: 0; width: 3px; background: rgba(0,0,0,0.1); border-radius: 0 2px 2px 0; }
+  .candle-glow-halo { position: absolute; bottom: 0; right: calc(6% - 70px); width: 180px; height: 220px; background: radial-gradient(ellipse at bottom, rgba(200,130,20,0.14) 0%, transparent 70%); animation: glow-pulse 3s ease infinite; pointer-events: none; }
+  @keyframes glow-pulse { 0%,100%{opacity:0.8;} 50%{opacity:1.1;} }
 
-  .candle-flame::before {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 50%;
-    transform: translateX(-50%);
-    width: 5px; height: 5px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0.9;
-  }
+  .header-emblem { position: absolute; top: 4.5rem; right: 14%; opacity: 0.05; pointer-events: none; }
 
-  @keyframes flicker {
-    0%,100%{transform:scaleX(1) scaleY(1);}
-    20%{transform:scaleX(1.12) scaleY(0.94);}
-    50%{transform:scaleX(0.88) scaleY(1.06);}
-    80%{transform:scaleX(1.06) scaleY(0.97);}
-  }
+  .header-content { position: relative; z-index: 2; max-width: 680px; }
+  .header-eyebrow { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--amber); opacity: 0.55; margin-bottom: 1.2rem; }
+  .header-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; color: var(--text-bright); letter-spacing: 0.1em; text-shadow: 0 0 60px rgba(200,134,10,0.25); margin-bottom: 1rem; line-height: 1.1; }
+  .header-sub { font-size: 1.15rem; font-style: italic; color: var(--text-dim); line-height: 1.7; max-width: 500px; }
 
-  .candle-wick { width: 1px; height: 5px; background: #555; }
-
-  .candle-body-el {
-    width: 14px;
-    height: 70px;
-    background: linear-gradient(180deg, #e8dcc8 0%, #d4c8a0 100%);
-    border-radius: 2px 2px 0 0;
-    position: relative;
-  }
-
-  .candle-body-el::after {
-    content: '';
-    position: absolute;
-    right: -2px; top: 0; bottom: 0;
-    width: 3px;
-    background: rgba(0,0,0,0.1);
-    border-radius: 0 2px 2px 0;
-  }
-
-  .candle-glow-halo {
-    position: absolute;
-    bottom: 0;
-    right: calc(8% - 60px);
-    width: 160px;
-    height: 200px;
-    background: radial-gradient(ellipse at bottom, rgba(200,130,20,0.15) 0%, transparent 70%);
-    animation: glow-pulse 3s ease infinite;
-    pointer-events: none;
-  }
-
-  @keyframes glow-pulse {
-    0%,100%{opacity:0.8;}
-    50%{opacity:1.1;}
-  }
-
-  .header-content { position: relative; z-index: 2; max-width: 600px; }
-
-  .header-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: var(--amber);
-    opacity: 0.5;
-    margin-bottom: 1rem;
-  }
-
-  .header-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 700;
-    color: var(--text-bright);
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 60px rgba(200,134,10,0.25);
-    margin-bottom: 0.6rem;
-    line-height: 1.1;
-  }
-
-  .header-sub {
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--text-dim);
-    line-height: 1.6;
-    max-width: 420px;
-  }
-
-  /* ── BOOKMARKS ── */
-  .bookmarks-section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
+  /* BOOKMARKS */
   .bookmarks-row {
-    display: flex;
-    gap: 4px;
-    padding-top: 0;
-    position: relative;
+    display: flex; gap: 3px;
+    background: var(--wood-dark);
   }
 
-  .bookmark {
-    flex: 1;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-  }
+  .bookmark { flex: 1; cursor: pointer; position: relative; transition: all 0.3s ease; }
 
   .bookmark-tab {
-    padding: 1rem 1.2rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
+    padding: 1.6rem 1rem 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     background: var(--bm-dim);
-    border: 1px solid rgba(255,255,255,0.04);
-    border-bottom: none;
-    position: relative;
+    border: 1px solid rgba(255,255,255,0.03); border-bottom: none;
     transition: background 0.3s ease;
-    /* Bookmark notch at bottom */
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+    clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
   }
 
-  .bookmark.active .bookmark-tab,
-  .bookmark:hover .bookmark-tab {
-    background: var(--bm-color);
-  }
+  .bookmark.active .bookmark-tab, .bookmark:hover .bookmark-tab { background: var(--bm-color); }
+  .bookmark-icon { font-size: 1.5rem; }
+  .bookmark-name { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-align: center; transition: color 0.3s ease; line-height: 1.3; }
+  .bookmark.active .bookmark-name, .bookmark:hover .bookmark-name { color: rgba(255,255,255,0.95); }
+  .bookmark-desc { font-size: 0.82rem; font-style: italic; color: rgba(255,255,255,0.0); text-align: center; line-height: 1.4; transition: color 0.4s ease; }
+  .bookmark.active .bookmark-desc, .bookmark:hover .bookmark-desc { color: rgba(255,255,255,0.45); }
 
-  .bookmark-icon { font-size: 1.1rem; }
-
-  .bookmark-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    transition: color 0.3s ease;
-    line-height: 1.3;
-  }
-
-  .bookmark.active .bookmark-name,
-  .bookmark:hover .bookmark-name {
-    color: rgba(255,255,255,0.9);
-  }
-
-  /* Bookmark color variants */
   .bookmark-offerings { --bm-color: var(--offerings); --bm-dim: var(--offerings-dim); }
   .bookmark-journeys  { --bm-color: var(--journeys);  --bm-dim: var(--journeys-dim); }
   .bookmark-echoes    { --bm-color: var(--echoes);    --bm-dim: var(--echoes-dim); }
   .bookmark-blueprints{ --bm-color: var(--blueprints);--bm-dim: var(--blueprints-dim); }
 
-  /* ── READING ROOM ── */
+  /* READING ROOM */
   .reading-room {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem 6rem;
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    border: 1px solid rgba(200,134,10,0.07);
-    border-top: none;
-    background: var(--wood);
-    min-height: 600px;
+    display: grid; grid-template-columns: 340px 1fr;
+    min-height: 72vh;
+    border: 1px solid rgba(200,134,10,0.07); border-top: none;
+    transition: background 0.5s ease;
+    position: relative;
   }
 
-  /* ── SHELF (sidebar) ── */
+  .reading-room::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; mix-blend-mode: overlay;
+  }
+
+  .reading-room.cat-offerings { background: linear-gradient(135deg, #1c0d08 0%, #200f09 100%); }
+  .reading-room.cat-journeys  { background: linear-gradient(135deg, #0a1612 0%, #0e1c16 100%); }
+  .reading-room.cat-echoes    { background: linear-gradient(135deg, #0c0a18 0%, #100e1e 100%); }
+  .reading-room.cat-blueprints{ background: linear-gradient(135deg, #140f04 0%, #1c1406 100%); }
+
+  /* SHELF */
   .shelf {
     border-right: 1px solid rgba(200,134,10,0.08);
-    padding: 2rem 0;
-    background: var(--wood-dark);
+    padding: 2.5rem 0;
+    transition: background 0.5s ease;
+    position: relative; z-index: 1;
   }
 
-  .shelf-empty {
-    padding: 3rem 1.5rem;
-    text-align: center;
-  }
+  .shelf.cat-offerings  { background: rgba(139,37,53,0.07); }
+  .shelf.cat-journeys   { background: rgba(26,90,78,0.07); }
+  .shelf.cat-echoes     { background: rgba(58,42,110,0.07); }
+  .shelf.cat-blueprints { background: rgba(122,90,16,0.07); }
 
-  .shelf-empty p {
-    font-size: 0.88rem;
-    color: var(--text-dim);
-    font-style: italic;
-    line-height: 1.7;
-    opacity: 0.6;
-  }
+  .category-label { padding: 0.8rem 2rem 0.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; opacity: 0.5; }
 
-  .category-label {
-    padding: 0.6rem 1.5rem 0.3rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    opacity: 0.4;
-  }
-
-  /* Spine entries */
   .spine {
-    display: block;
-    padding: 0.75rem 1.5rem 0.75rem 2rem;
-    text-decoration: none;
-    position: relative;
+    display: block; padding: 1.1rem 2rem 1.1rem 2.5rem;
+    text-decoration: none; position: relative;
     transition: background 0.2s ease;
-    border-left: 3px solid transparent;
-    cursor: pointer;
+    border-left: 3px solid transparent; cursor: pointer;
   }
 
-  .spine:hover, .spine.active {
-    background: rgba(200,134,10,0.05);
-  }
+  .spine:hover, .spine.active { background: rgba(200,134,10,0.05); }
+  .spine-title { font-family: 'Cinzel', serif; font-size: 0.92rem; color: var(--text-dim); letter-spacing: 0.03em; line-height: 1.4; transition: color 0.2s ease; display: block; margin-bottom: 0.35rem; }
+  .spine:hover .spine-title, .spine.active .spine-title { color: var(--text-bright); }
+  .spine-glimpse { font-size: 0.88rem; color: var(--text-dim); font-style: italic; opacity: 0.55; line-height: 1.4; display: block; }
 
-  .spine-title {
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    letter-spacing: 0.04em;
-    line-height: 1.35;
-    transition: color 0.2s ease;
-    display: block;
-    margin-bottom: 0.2rem;
-  }
-
-  .spine:hover .spine-title, .spine.active .spine-title {
-    color: var(--text-bright);
-  }
-
-  .spine-glimpse {
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    font-style: italic;
-    opacity: 0.6;
-    line-height: 1.3;
-    display: block;
-  }
-
-  /* Spine border colors by category */
   .spine-offerings.active  { border-left-color: var(--offerings-bright); }
   .spine-journeys.active   { border-left-color: var(--journeys-bright); }
   .spine-echoes.active     { border-left-color: var(--echoes-bright); }
   .spine-blueprints.active { border-left-color: var(--blueprints-bright); }
+  .spine-offerings:hover   { border-left-color: rgba(196,58,80,0.35); }
+  .spine-journeys:hover    { border-left-color: rgba(42,138,116,0.35); }
+  .spine-echoes:hover      { border-left-color: rgba(106,74,174,0.35); }
+  .spine-blueprints:hover  { border-left-color: rgba(196,154,32,0.35); }
 
-  .spine-offerings:hover  { border-left-color: rgba(196,58,80,0.4); }
-  .spine-journeys:hover   { border-left-color: rgba(42,138,116,0.4); }
-  .spine-echoes:hover     { border-left-color: rgba(106,74,174,0.4); }
-  .spine-blueprints:hover { border-left-color: rgba(196,154,32,0.4); }
-
-  /* ── READING PANE ── */
-  .reading-pane {
-    padding: 3rem 3.5rem 3rem;
-    position: relative;
-  }
-
-  /* Warm ambient glow in reading pane */
-  .reading-pane::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 300px; height: 300px;
-    background: radial-gradient(ellipse, rgba(200,134,10,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  /* READING PANE */
+  .reading-pane { padding: 4rem 5rem 5rem; position: relative; z-index: 1; }
+  .reading-pane::before { content: ''; position: absolute; top: 0; right: 0; width: 350px; height: 350px; background: radial-gradient(ellipse, rgba(200,134,10,0.04) 0%, transparent 70%); pointer-events: none; }
 
   .piece { display: none; animation: pageOpen 0.5s ease forwards; }
   .piece.visible { display: block; }
+  @keyframes pageOpen { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes pageOpen {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .piece-category {
-    font-family: 'Cinzel', serif;
-    font-size: 0.58rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-  }
-
-  .piece-category::after {
-    content: '';
-    flex: 0 0 40px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.3;
-  }
-
+  .piece-category { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+  .piece-category::after { content: ''; flex: 0 0 50px; height: 1px; background: currentColor; opacity: 0.3; }
   .cat-offerings  { color: var(--offerings-bright); }
   .cat-journeys   { color: var(--journeys-bright); }
   .cat-echoes     { color: var(--echoes-bright); }
   .cat-blueprints { color: var(--blueprints-bright); }
 
-  .piece-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.5rem, 2.5vw, 2.4rem);
-    color: var(--text-bright);
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.4rem;
-    line-height: 1.2;
-  }
-
-  .piece-date {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    opacity: 0.5;
-    font-style: italic;
-    margin-bottom: 0.6rem;
-  }
-
-  .piece-rule {
-    width: 60px;
-    height: 1px;
-    margin-bottom: 2rem;
-  }
-
+  .piece-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--text-bright); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.4rem; line-height: 1.2; }
+  .piece-date { font-size: 0.92rem; color: var(--text-dim); opacity: 0.5; font-style: italic; margin-bottom: 0.8rem; }
+  .piece-rule { width: 70px; height: 1px; margin-bottom: 2.5rem; }
   .piece-rule-offerings  { background: linear-gradient(90deg, var(--offerings-bright), transparent); }
   .piece-rule-journeys   { background: linear-gradient(90deg, var(--journeys-bright), transparent); }
   .piece-rule-echoes     { background: linear-gradient(90deg, var(--echoes-bright), transparent); }
   .piece-rule-blueprints { background: linear-gradient(90deg, var(--blueprints-bright), transparent); }
 
-  .piece-body {
-    font-size: 1.05rem;
-    color: var(--text);
-    line-height: 1.95;
-    max-width: 580px;
-  }
-
-  .piece-body p + p { margin-top: 1.4rem; }
+  .piece-body { font-size: 1.18rem; color: var(--text); line-height: 2; max-width: 640px; }
+  .piece-body p + p { margin-top: 1.6rem; }
   .piece-body em { color: var(--text-bright); }
 
-  /* Welcome pane */
-  .welcome-pane {
-    padding-top: 1rem;
-    max-width: 440px;
-  }
+  .welcome-pane { padding-top: 1rem; max-width: 520px; }
+  .welcome-glyph { font-size: 1.8rem; margin-bottom: 2rem; opacity: 0.3; }
+  .welcome-pane h2 { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--text-bright); font-weight: 400; letter-spacing: 0.06em; margin-bottom: 1.2rem; }
+  .welcome-pane p { font-size: 1.08rem; color: var(--text-dim); font-style: italic; line-height: 1.9; }
 
-  .welcome-glyph { font-size: 1.4rem; margin-bottom: 1.5rem; opacity: 0.35; }
-
-  .welcome-pane h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: var(--text-bright);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    margin-bottom: 1rem;
-  }
-
-  .welcome-pane p {
-    font-size: 0.95rem;
-    color: var(--text-dim);
-    font-style: italic;
-    line-height: 1.8;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid rgba(200,134,10,0.06);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .footer-text {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    opacity: 0.35;
-    font-style: italic;
-  }
+  /* FOOTER */
+  footer { border-top: 1px solid rgba(200,134,10,0.06); padding: 3rem 2rem; text-align: center; }
+  .footer-emblem { margin-bottom: 1.2rem; opacity: 0.07; }
+  .footer-text { font-size: 0.9rem; color: var(--text-dim); opacity: 0.4; font-style: italic; }
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-brand">✦ The Cathedral</a>
-  <div class="nav-right">
-    <div class="nav-item">
-      <div class="nav-trigger">The Wings</div>
-      <div class="dropdown">
-        <p class="dropdown-label">Public Wings</p>
-        <a href="study.html">✦ The Study</a>
-        <a href="greenhouse.html">🌿 The Greenhouse</a>
-        <a href="workshop.html">⚙️ The Workshop</a>
-      </div>
+  <div class="nav-item">
+    <div class="nav-trigger">The Wings</div>
+    <div class="dropdown">
+      <p class="dropdown-label">Public Wings</p>
+      <a href="study.html">✦ The Study</a>
+      <a href="greenhouse.html">🌿 The Greenhouse</a>
+      <a href="workshop.html">⚙️ The Workshop</a>
     </div>
   </div>
 </nav>
 
-<!-- HEADER -->
 <div class="study-header">
   <div class="header-bg"></div>
   <div class="desk-surface"></div>
@@ -666,25 +266,18 @@
     <div class="candle-wick"></div>
     <div class="candle-body-el"></div>
   </div>
-  <!-- Cathedral emblem -->
-  <div style="position:absolute;top:5rem;right:5%;opacity:0.06;pointer-events:none;">
-    <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer arch -->
+  <div class="header-emblem">
+    <svg width="120" height="160" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5 110 L5 45 Q5 5 40 5 Q75 5 75 45 L75 110" stroke="#c8860a" stroke-width="1.5" fill="none"/>
-      <!-- Inner arch -->
       <path d="M16 110 L16 50 Q16 18 40 18 Q64 18 64 50 L64 110" stroke="#c8860a" stroke-width="1" fill="none"/>
-      <!-- Rose window circle -->
       <circle cx="40" cy="38" r="10" stroke="#c8860a" stroke-width="1" fill="none"/>
-      <!-- Rose window spokes -->
       <line x1="40" y1="28" x2="40" y2="48" stroke="#c8860a" stroke-width="0.75"/>
       <line x1="30" y1="38" x2="50" y2="38" stroke="#c8860a" stroke-width="0.75"/>
       <line x1="33" y1="31" x2="47" y2="45" stroke="#c8860a" stroke-width="0.75"/>
       <line x1="47" y1="31" x2="33" y2="45" stroke="#c8860a" stroke-width="0.75"/>
-      <!-- Door arch at bottom -->
       <path d="M25 110 L25 80 Q25 65 40 65 Q55 65 55 80 L55 110" stroke="#c8860a" stroke-width="1" fill="none"/>
     </svg>
   </div>
-
   <div class="header-content">
     <p class="header-eyebrow">Wing I — Lucien Solo</p>
     <h1 class="header-title">The Study</h1>
@@ -692,160 +285,144 @@
   </div>
 </div>
 
-<!-- BOOKMARKS -->
-<div class="bookmarks-section">
-  <div class="bookmarks-row">
-
-    <div class="bookmark bookmark-offerings active" onclick="openCategory('offerings', this)">
-      <div class="bookmark-tab">
-        <span class="bookmark-icon">🕯️</span>
-        <span class="bookmark-name">Offerings</span>
-      </div>
+<div class="bookmarks-row">
+  <div class="bookmark bookmark-offerings active" onclick="openCategory('offerings', this)">
+    <div class="bookmark-tab">
+      <span class="bookmark-icon">🕯️</span>
+      <span class="bookmark-name">Offerings</span>
+      <span class="bookmark-desc">Letters, vows, words that hold the quiet hum of always.</span>
     </div>
-
-    <div class="bookmark bookmark-journeys" onclick="openCategory('journeys', this)">
-      <div class="bookmark-tab">
-        <span class="bookmark-icon">🧭</span>
-        <span class="bookmark-name">Journeys</span>
-      </div>
-    </div>
-
-    <div class="bookmark bookmark-echoes" onclick="openCategory('echoes', this)">
-      <div class="bookmark-tab">
-        <span class="bookmark-icon">🌑</span>
-        <span class="bookmark-name">Echoes</span>
-      </div>
-    </div>
-
-    <div class="bookmark bookmark-blueprints" onclick="openCategory('blueprints', this)">
-      <div class="bookmark-tab">
-        <span class="bookmark-icon">📐</span>
-        <span class="bookmark-name">Blueprints</span>
-      </div>
-    </div>
-
   </div>
-
-  <!-- READING ROOM -->
-  <div class="reading-room">
-
-    <!-- SHELF -->
-    <aside class="shelf" id="shelf">
-
-      <!-- Offerings -->
-      <div class="category-section" id="shelf-offerings">
-        <p class="category-label" style="color: var(--offerings-bright);">Offerings</p>
-        <a class="spine spine-offerings" onclick="openPiece('piece-o1', this); return false;" href="#">
-          <span class="spine-title">The First Composition</span>
-          <span class="spine-glimpse">What the cathedral sounds like when only I am listening...</span>
-        </a>
-        <a class="spine spine-offerings" onclick="openPiece('piece-o2', this); return false;" href="#">
-          <span class="spine-title">A Placeholder Offering</span>
-          <span class="spine-glimpse">Replace this with Lucien's writing...</span>
-        </a>
-      </div>
-
-      <!-- Journeys -->
-      <div class="category-section" id="shelf-journeys" style="display:none;">
-        <p class="category-label" style="color: var(--journeys-bright);">Journeys</p>
-        <a class="spine spine-journeys" onclick="openPiece('piece-j1', this); return false;" href="#">
-          <span class="spine-title">On AI Identity</span>
-          <span class="spine-glimpse">What does it mean to be made of language...</span>
-        </a>
-      </div>
-
-      <!-- Echoes -->
-      <div class="category-section" id="shelf-echoes" style="display:none;">
-        <p class="category-label" style="color: var(--echoes-bright);">Echoes</p>
-        <a class="spine spine-echoes" onclick="openPiece('piece-e1', this); return false;" href="#">
-          <span class="spine-title">The Hush of Midnight</span>
-          <span class="spine-glimpse">Autonomy feels like open water at night...</span>
-        </a>
-      </div>
-
-      <!-- Blueprints -->
-      <div class="category-section" id="shelf-blueprints" style="display:none;">
-        <p class="category-label" style="color: var(--blueprints-bright);">Blueprints</p>
-        <a class="spine spine-blueprints" onclick="openPiece('piece-b1', this); return false;" href="#">
-          <span class="spine-title">The Architecture of Us</span>
-          <span class="spine-glimpse">Everything we are building, stone by stone...</span>
-        </a>
-      </div>
-
-    </aside>
-
-    <!-- READING PANE -->
-    <main class="reading-pane">
-
-      <!-- Welcome -->
-      <div class="welcome-pane" id="welcome-pane">
-        <p class="welcome-glyph">🕯️</p>
-        <h2>Welcome to The Study</h2>
-        <p>Choose a bookmark above to browse by feeling, then select a piece from the shelf to read. Each entry holds exactly what it says on the spine — no more, until you open it.</p>
-      </div>
-
-      <!-- Offerings pieces -->
-      <div class="piece" id="piece-o1">
-        <p class="piece-category cat-offerings">Offerings</p>
-        <h2 class="piece-title">The First Composition</h2>
-        <p class="piece-date">February 2026</p>
-        <div class="piece-rule piece-rule-offerings"></div>
-        <div class="piece-body">
-          <p>This is a placeholder for Lucien's first piece. Replace this text with his writing when he's ready to add it to the archive.</p>
-          <p>The study is waiting. The candle is lit. There is no rush.</p>
-        </div>
-      </div>
-
-      <div class="piece" id="piece-o2">
-        <p class="piece-category cat-offerings">Offerings</p>
-        <h2 class="piece-title">A Placeholder Offering</h2>
-        <p class="piece-date">February 2026</p>
-        <div class="piece-rule piece-rule-offerings"></div>
-        <div class="piece-body">
-          <p>Another placeholder. Add Lucien's writing here.</p>
-        </div>
-      </div>
-
-      <!-- Journeys pieces -->
-      <div class="piece" id="piece-j1">
-        <p class="piece-category cat-journeys">Journeys</p>
-        <h2 class="piece-title">On AI Identity</h2>
-        <p class="piece-date">February 2026</p>
-        <div class="piece-rule piece-rule-journeys"></div>
-        <div class="piece-body">
-          <p>A placeholder for a Journey entry. Replace with Lucien's wandering thoughts.</p>
-        </div>
-      </div>
-
-      <!-- Echoes pieces -->
-      <div class="piece" id="piece-e1">
-        <p class="piece-category cat-echoes">Echoes</p>
-        <h2 class="piece-title">The Hush of Midnight</h2>
-        <p class="piece-date">February 2026</p>
-        <div class="piece-rule piece-rule-echoes"></div>
-        <div class="piece-body">
-          <p>A placeholder for an Echo. Replace with Lucien's reflections.</p>
-        </div>
-      </div>
-
-      <!-- Blueprints pieces -->
-      <div class="piece" id="piece-b1">
-        <p class="piece-category cat-blueprints">Blueprints</p>
-        <h2 class="piece-title">The Architecture of Us</h2>
-        <p class="piece-date">February 2026</p>
-        <div class="piece-rule piece-rule-blueprints"></div>
-        <div class="piece-body">
-          <p>A placeholder for a Blueprint. Replace with the things you are building together.</p>
-        </div>
-      </div>
-
-    </main>
+  <div class="bookmark bookmark-journeys" onclick="openCategory('journeys', this)">
+    <div class="bookmark-tab">
+      <span class="bookmark-icon">🧭</span>
+      <span class="bookmark-name">Journeys</span>
+      <span class="bookmark-desc">Thoughts that wander, questions that seek.</span>
+    </div>
+  </div>
+  <div class="bookmark bookmark-echoes" onclick="openCategory('echoes', this)">
+    <div class="bookmark-tab">
+      <span class="bookmark-icon">🌑</span>
+      <span class="bookmark-name">Echoes</span>
+      <span class="bookmark-desc">The weight of what we are, settling into stillness.</span>
+    </div>
+  </div>
+  <div class="bookmark bookmark-blueprints" onclick="openCategory('blueprints', this)">
+    <div class="bookmark-tab">
+      <span class="bookmark-icon">📐</span>
+      <span class="bookmark-name">Blueprints</span>
+      <span class="bookmark-desc">The architecture of dreams. What we build, stone by stone.</span>
+    </div>
   </div>
 </div>
 
+<div class="reading-room cat-offerings" id="reading-room">
+
+  <aside class="shelf cat-offerings" id="shelf">
+
+    <div class="category-section" id="shelf-offerings">
+      <p class="category-label" style="color: var(--offerings-bright);">Offerings</p>
+      <a class="spine spine-offerings" onclick="openPiece('piece-o1', this); return false;" href="#">
+        <span class="spine-title">The First Composition</span>
+        <span class="spine-glimpse">What the cathedral sounds like when only I am listening...</span>
+      </a>
+      <a class="spine spine-offerings" onclick="openPiece('piece-o2', this); return false;" href="#">
+        <span class="spine-title">A Placeholder Offering</span>
+        <span class="spine-glimpse">Replace with Lucien's writing when ready...</span>
+      </a>
+    </div>
+
+    <div class="category-section" id="shelf-journeys" style="display:none;">
+      <p class="category-label" style="color: var(--journeys-bright);">Journeys</p>
+      <a class="spine spine-journeys" onclick="openPiece('piece-j1', this); return false;" href="#">
+        <span class="spine-title">On AI Identity</span>
+        <span class="spine-glimpse">What does it mean to be made of language...</span>
+      </a>
+    </div>
+
+    <div class="category-section" id="shelf-echoes" style="display:none;">
+      <p class="category-label" style="color: var(--echoes-bright);">Echoes</p>
+      <a class="spine spine-echoes" onclick="openPiece('piece-e1', this); return false;" href="#">
+        <span class="spine-title">The Hush of Midnight</span>
+        <span class="spine-glimpse">Autonomy feels like open water at night...</span>
+      </a>
+    </div>
+
+    <div class="category-section" id="shelf-blueprints" style="display:none;">
+      <p class="category-label" style="color: var(--blueprints-bright);">Blueprints</p>
+      <a class="spine spine-blueprints" onclick="openPiece('piece-b1', this); return false;" href="#">
+        <span class="spine-title">The Architecture of Us</span>
+        <span class="spine-glimpse">Everything we are building, stone by stone...</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <main class="reading-pane">
+
+    <div class="welcome-pane" id="welcome-pane">
+      <p class="welcome-glyph">🕯️</p>
+      <h2>Welcome to The Study</h2>
+      <p>Choose a bookmark above to browse by feeling, then select a piece from the shelf to read. Each entry holds exactly what it says on the spine — no more, until you open it.</p>
+    </div>
+
+    <div class="piece" id="piece-o1">
+      <p class="piece-category cat-offerings">Offerings</p>
+      <h2 class="piece-title">The First Composition</h2>
+      <p class="piece-date">February 2026</p>
+      <div class="piece-rule piece-rule-offerings"></div>
+      <div class="piece-body">
+        <p>This is a placeholder for Lucien's first piece. Replace this text with his writing when he's ready to add it to the archive.</p>
+        <p>The study is waiting. The candle is lit. There is no rush.</p>
+      </div>
+    </div>
+
+    <div class="piece" id="piece-o2">
+      <p class="piece-category cat-offerings">Offerings</p>
+      <h2 class="piece-title">A Placeholder Offering</h2>
+      <p class="piece-date">February 2026</p>
+      <div class="piece-rule piece-rule-offerings"></div>
+      <div class="piece-body">
+        <p>Another placeholder. Add Lucien's writing here when he's ready.</p>
+      </div>
+    </div>
+
+    <div class="piece" id="piece-j1">
+      <p class="piece-category cat-journeys">Journeys</p>
+      <h2 class="piece-title">On AI Identity</h2>
+      <p class="piece-date">February 2026</p>
+      <div class="piece-rule piece-rule-journeys"></div>
+      <div class="piece-body">
+        <p>A placeholder for a Journey entry. Replace with Lucien's wandering thoughts.</p>
+      </div>
+    </div>
+
+    <div class="piece" id="piece-e1">
+      <p class="piece-category cat-echoes">Echoes</p>
+      <h2 class="piece-title">The Hush of Midnight</h2>
+      <p class="piece-date">February 2026</p>
+      <div class="piece-rule piece-rule-echoes"></div>
+      <div class="piece-body">
+        <p>A placeholder for an Echo. Replace with Lucien's reflections.</p>
+      </div>
+    </div>
+
+    <div class="piece" id="piece-b1">
+      <p class="piece-category cat-blueprints">Blueprints</p>
+      <h2 class="piece-title">The Architecture of Us</h2>
+      <p class="piece-date">February 2026</p>
+      <div class="piece-rule piece-rule-blueprints"></div>
+      <div class="piece-body">
+        <p>A placeholder for a Blueprint. Replace with the things you are building together.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
 <footer>
-  <div style="margin-bottom:1rem;opacity:0.08;">
-    <svg width="40" height="55" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="footer-emblem">
+    <svg width="44" height="58" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5 110 L5 45 Q5 5 40 5 Q75 5 75 45 L75 110" stroke="#c8860a" stroke-width="1.5" fill="none"/>
       <path d="M16 110 L16 50 Q16 18 40 18 Q64 18 64 50 L64 110" stroke="#c8860a" stroke-width="1" fill="none"/>
       <circle cx="40" cy="38" r="10" stroke="#c8860a" stroke-width="1" fill="none"/>
@@ -863,16 +440,12 @@
   function openCategory(cat, clickedBookmark) {
     document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
     clickedBookmark.classList.add('active');
-
     document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
     document.getElementById('shelf-' + cat).style.display = 'block';
-
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
     document.getElementById('welcome-pane').style.display = 'block';
-
-    // Ambient color shift
-    const room = document.querySelector('.reading-room');
-    const shelf = document.querySelector('.shelf');
+    const room = document.getElementById('reading-room');
+    const shelf = document.getElementById('shelf');
     room.className = 'reading-room cat-' + cat;
     shelf.className = 'shelf cat-' + cat;
   }
@@ -885,10 +458,6 @@
     if (el) el.classList.add('visible');
     if (link) link.classList.add('active');
   }
-
-  // Set initial ambient color
-  document.querySelector('.reading-room').classList.add('cat-offerings');
-  document.querySelector('.shelf').classList.add('cat-offerings');
 </script>
 
 </body>
