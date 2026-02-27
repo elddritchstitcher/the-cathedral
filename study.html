@@ -10,6 +10,8 @@
     --black: #060408;
     --wood-dark: #0e0905;
     --wood: #160c06;
+    --shelf-bg: #120a04;
+    --shelf-edge: #2a1608;
     --amber: #c8860a;
     --amber-bright: #e8a020;
     --amber-glow: #f5c060;
@@ -60,7 +62,7 @@
     pointer-events: none; z-index: 998;
   }
 
-  /* NAV */
+  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     padding: 1.1rem 3rem;
@@ -69,7 +71,6 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(200,134,10,0.08);
   }
-
   .nav-brand { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.25em; color: var(--amber); text-decoration: none; opacity: 0.9; }
   .nav-item { position: relative; }
   .nav-trigger { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); cursor: pointer; padding: 0.4rem 0; transition: color 0.3s ease; user-select: none; display: flex; align-items: center; gap: 0.5rem; }
@@ -85,12 +86,11 @@
   .dropdown a:hover::before { transform: scaleY(1); }
   .dropdown-label { padding: 0.5rem 1.5rem 0.3rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.4; }
 
-  /* HEADER */
+  /* ── HEADER ── */
   .study-header {
     position: relative; padding: 7rem 5rem 4rem; overflow: hidden;
     border-bottom: 1px solid rgba(200,134,10,0.08);
   }
-
   .header-bg {
     position: absolute; inset: 0;
     background:
@@ -98,11 +98,8 @@
       radial-gradient(ellipse 40% 60% at 92% 30%, rgba(139,37,53,0.07) 0%, transparent 60%),
       linear-gradient(180deg, #060408 0%, #0e0905 60%, #160c06 100%);
   }
-
   .desk-surface { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(180,120,40,0.2) 20%, rgba(200,140,50,0.3) 50%, rgba(180,120,40,0.2) 80%, transparent 100%); }
-
   .desk-candle { position: absolute; bottom: 2rem; right: 6%; display: flex; flex-direction: column; align-items: center; }
-
   .candle-flame { width: 12px; height: 24px; background: radial-gradient(ellipse at bottom, #fff8e0 0%, #e8a030 40%, transparent 100%); border-radius: 50% 50% 30% 30%; animation: flicker 2s ease infinite; position: relative; }
   .candle-flame::before { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: #fff; border-radius: 50%; opacity: 0.9; }
   @keyframes flicker { 0%,100%{transform:scaleX(1) scaleY(1);} 20%{transform:scaleX(1.12) scaleY(0.93);} 50%{transform:scaleX(0.88) scaleY(1.07);} 80%{transform:scaleX(1.06) scaleY(0.97);} }
@@ -111,22 +108,18 @@
   .candle-body-el::after { content: ''; position: absolute; right: -2px; top: 0; bottom: 0; width: 3px; background: rgba(0,0,0,0.1); border-radius: 0 2px 2px 0; }
   .candle-glow-halo { position: absolute; bottom: 0; right: calc(6% - 70px); width: 180px; height: 220px; background: radial-gradient(ellipse at bottom, rgba(200,130,20,0.14) 0%, transparent 70%); animation: glow-pulse 3s ease infinite; pointer-events: none; }
   @keyframes glow-pulse { 0%,100%{opacity:0.8;} 50%{opacity:1.1;} }
-
   .header-emblem { position: absolute; top: 4.5rem; right: 14%; opacity: 0.05; pointer-events: none; }
-
   .header-content { position: relative; z-index: 2; max-width: 680px; }
   .header-eyebrow { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--amber); opacity: 0.55; margin-bottom: 1.2rem; }
   .header-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; color: var(--text-bright); letter-spacing: 0.1em; text-shadow: 0 0 60px rgba(200,134,10,0.25); margin-bottom: 1rem; line-height: 1.1; }
   .header-sub { font-size: 1.15rem; font-style: italic; color: var(--text-dim); line-height: 1.7; max-width: 500px; }
 
-  /* BOOKMARKS */
+  /* ── BOOKMARKS ── */
   .bookmarks-row {
     display: flex; gap: 3px;
     background: var(--wood-dark);
   }
-
   .bookmark { flex: 1; cursor: pointer; position: relative; transition: all 0.3s ease; }
-
   .bookmark-tab {
     padding: 1.6rem 1rem 2rem;
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
@@ -135,22 +128,21 @@
     transition: background 0.3s ease;
     clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
   }
-
   .bookmark.active .bookmark-tab, .bookmark:hover .bookmark-tab { background: var(--bm-color); }
   .bookmark-icon { font-size: 1.5rem; }
-  .bookmark-name { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-align: center; transition: color 0.3s ease; line-height: 1.3; }
+  .bookmark-name { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-align: center; transition: color 0.3s ease; }
   .bookmark.active .bookmark-name, .bookmark:hover .bookmark-name { color: rgba(255,255,255,0.95); }
   .bookmark-desc { font-size: 0.82rem; font-style: italic; color: rgba(255,255,255,0.0); text-align: center; line-height: 1.4; transition: color 0.4s ease; }
   .bookmark.active .bookmark-desc, .bookmark:hover .bookmark-desc { color: rgba(255,255,255,0.45); }
-
   .bookmark-offerings { --bm-color: var(--offerings); --bm-dim: var(--offerings-dim); }
   .bookmark-journeys  { --bm-color: var(--journeys);  --bm-dim: var(--journeys-dim); }
   .bookmark-echoes    { --bm-color: var(--echoes);    --bm-dim: var(--echoes-dim); }
   .bookmark-blueprints{ --bm-color: var(--blueprints);--bm-dim: var(--blueprints-dim); }
 
-  /* READING ROOM */
+  /* ── MAIN LAYOUT ── */
   .reading-room {
-    display: grid; grid-template-columns: 340px 1fr;
+    display: grid;
+    grid-template-columns: 340px 1fr;
     min-height: 72vh;
     border: 1px solid rgba(200,134,10,0.07); border-top: none;
     transition: background 0.5s ease;
@@ -167,20 +159,24 @@
   .reading-room.cat-journeys  { background: linear-gradient(135deg, #0a1612 0%, #0e1c16 100%); }
   .reading-room.cat-echoes    { background: linear-gradient(135deg, #0c0a18 0%, #100e1e 100%); }
   .reading-room.cat-blueprints{ background: linear-gradient(135deg, #140f04 0%, #1c1406 100%); }
+  .reading-room.cat-shelf     { background: linear-gradient(135deg, #120a04 0%, #160c05 100%); }
 
-  /* SHELF */
+  /* ── SHELF SIDEBAR ── */
   .shelf {
     border-right: 1px solid rgba(200,134,10,0.08);
-    padding: 2.5rem 0;
     transition: background 0.5s ease;
     position: relative; z-index: 1;
+    display: flex; flex-direction: column;
   }
 
   .shelf.cat-offerings  { background: rgba(139,37,53,0.07); }
   .shelf.cat-journeys   { background: rgba(26,90,78,0.07); }
   .shelf.cat-echoes     { background: rgba(58,42,110,0.07); }
   .shelf.cat-blueprints { background: rgba(122,90,16,0.07); }
+  .shelf.cat-shelf      { background: rgba(180,120,20,0.04); }
 
+  /* Category entries (old spine list) */
+  .category-section { padding: 1rem 0; }
   .category-label { padding: 0.8rem 2rem 0.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; opacity: 0.5; }
 
   .spine {
@@ -189,12 +185,10 @@
     transition: background 0.2s ease;
     border-left: 3px solid transparent; cursor: pointer;
   }
-
   .spine:hover, .spine.active { background: rgba(200,134,10,0.05); }
   .spine-title { font-family: 'Cinzel', serif; font-size: 0.92rem; color: var(--text-dim); letter-spacing: 0.03em; line-height: 1.4; transition: color 0.2s ease; display: block; margin-bottom: 0.35rem; }
   .spine:hover .spine-title, .spine.active .spine-title { color: var(--text-bright); }
   .spine-glimpse { font-size: 0.88rem; color: var(--text-dim); font-style: italic; opacity: 0.55; line-height: 1.4; display: block; }
-
   .spine-offerings.active  { border-left-color: var(--offerings-bright); }
   .spine-journeys.active   { border-left-color: var(--journeys-bright); }
   .spine-echoes.active     { border-left-color: var(--echoes-bright); }
@@ -204,7 +198,184 @@
   .spine-echoes:hover      { border-left-color: rgba(106,74,174,0.35); }
   .spine-blueprints:hover  { border-left-color: rgba(196,154,32,0.35); }
 
-  /* READING PANE */
+  /* ── BOOKSHELF ── */
+  .bookshelf-section {
+    padding: 1.5rem 1.2rem 0;
+    display: none; /* shown when shelf tab active */
+  }
+
+  .shelf-label {
+    font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--amber); opacity: 0.4;
+    margin-bottom: 1rem; padding-left: 0.3rem;
+  }
+
+  /* Book stack — horizontal bars stacked vertically */
+  .book-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 1.2rem;
+  }
+
+  .book {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .book:hover { transform: translateX(6px); }
+  .book.open  { transform: translateX(8px); }
+
+  .book-spine {
+    width: 100%;
+    height: 42px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+    gap: 0.8rem;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.05),
+      inset 0 -2px 4px rgba(0,0,0,0.3),
+      0 2px 6px rgba(0,0,0,0.35);
+    transition: box-shadow 0.2s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+  }
+
+  .book.open .book-spine {
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.07),
+      inset 0 -2px 4px rgba(0,0,0,0.3),
+      0 2px 12px rgba(200,134,10,0.18),
+      0 0 20px rgba(200,134,10,0.07);
+  }
+
+  /* Page edge effect on right side */
+  .book-spine::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.06));
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* Binding line on left */
+  .book-spine::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .book-month {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    padding-left: 0.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .book.open .book-month,
+  .book:hover .book-month { color: rgba(255,255,255,0.95); }
+
+  .book-entry-count {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.25);
+    transition: color 0.2s ease;
+    padding-right: 0.8rem;
+  }
+
+  .book:hover .book-entry-count,
+  .book.open .book-entry-count { color: rgba(255,255,255,0.5); }
+
+  /* Book color variants */
+  .book-color-1 { background: linear-gradient(90deg, #4a1520 0%, #5a1a28 100%); }
+  .book-color-2 { background: linear-gradient(90deg, #0f2238 0%, #1a3a5a 100%); }
+  .book-color-3 { background: linear-gradient(90deg, #182e18 0%, #2a4a2a 100%); }
+  .book-color-4 { background: linear-gradient(90deg, #2e2210 0%, #4a3a1a 100%); }
+  .book-color-5 { background: linear-gradient(90deg, #22102e 0%, #3a1a4a 100%); }
+  .book-color-6 { background: linear-gradient(90deg, #102e2e 0%, #1a4a4a 100%); }
+
+  /* ── TOC DROPDOWN ── */
+  .toc-dropdown {
+    display: none;
+    background: linear-gradient(180deg, #0e0803 0%, #120a05 100%);
+    border: 1px solid rgba(200,134,10,0.1);
+    border-top: 2px solid rgba(200,134,10,0.2);
+    margin: 0 0 1rem 0;
+    animation: tocOpen 0.25s ease forwards;
+  }
+
+  .toc-dropdown.open { display: block; }
+
+  @keyframes tocOpen {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .toc-header {
+    padding: 0.8rem 1.2rem 0.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+
+  .toc-month-name {
+    font-family: 'Cinzel', serif; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--amber); opacity: 0.7;
+  }
+
+  .toc-rule {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(200,134,10,0.3), transparent);
+  }
+
+  .toc-entry {
+    display: block;
+    padding: 0.7rem 1.2rem 0.7rem 1.5rem;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .toc-entry:hover, .toc-entry.active {
+    background: rgba(200,134,10,0.05);
+    border-left-color: rgba(200,134,10,0.4);
+  }
+
+  .toc-entry-title {
+    font-family: 'Cinzel', serif; font-size: 0.82rem;
+    color: var(--text-dim); letter-spacing: 0.02em;
+    line-height: 1.35; display: block;
+    transition: color 0.2s ease;
+    margin-bottom: 0.2rem;
+  }
+
+  .toc-entry:hover .toc-entry-title,
+  .toc-entry.active .toc-entry-title { color: var(--text-bright); }
+
+  .toc-entry-tag {
+    font-size: 0.72rem; font-style: italic;
+    opacity: 0.4; display: block;
+  }
+
+  .toc-entry-tag.tag-offerings  { color: var(--offerings-bright); }
+  .toc-entry-tag.tag-journeys   { color: var(--journeys-bright); }
+  .toc-entry-tag.tag-echoes     { color: var(--echoes-bright); }
+  .toc-entry-tag.tag-blueprints { color: var(--blueprints-bright); }
+
+  /* ── READING PANE ── */
   .reading-pane { padding: 4rem 5rem 5rem; position: relative; z-index: 1; }
   .reading-pane::before { content: ''; position: absolute; top: 0; right: 0; width: 350px; height: 350px; background: radial-gradient(ellipse, rgba(200,134,10,0.04) 0%, transparent 70%); pointer-events: none; }
 
@@ -236,7 +407,7 @@
   .welcome-pane h2 { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--text-bright); font-weight: 400; letter-spacing: 0.06em; margin-bottom: 1.2rem; }
   .welcome-pane p { font-size: 1.08rem; color: var(--text-dim); font-style: italic; line-height: 1.9; }
 
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer { border-top: 1px solid rgba(200,134,10,0.06); padding: 3rem 2rem; text-align: center; }
   .footer-emblem { margin-bottom: 1.2rem; opacity: 0.07; }
   .footer-text { font-size: 0.9rem; color: var(--text-dim); opacity: 0.4; font-style: italic; }
@@ -257,6 +428,7 @@
   </div>
 </nav>
 
+<!-- HEADER -->
 <div class="study-header">
   <div class="header-bg"></div>
   <div class="desk-surface"></div>
@@ -285,8 +457,9 @@
   </div>
 </div>
 
+<!-- BOOKMARKS -->
 <div class="bookmarks-row">
-  <div class="bookmark bookmark-offerings active" onclick="openCategory('offerings', this)">
+  <div class="bookmark bookmark-offerings" onclick="openCategory('offerings', this)">
     <div class="bookmark-tab">
       <span class="bookmark-icon">🕯️</span>
       <span class="bookmark-name">Offerings</span>
@@ -314,56 +487,86 @@
       <span class="bookmark-desc">The architecture of dreams. What we build, stone by stone.</span>
     </div>
   </div>
+  <!-- Shelf tab -->
+  <div class="bookmark" style="--bm-color:#2a1608; --bm-dim:#160c04;" onclick="openShelf(this)">
+    <div class="bookmark-tab">
+      <span class="bookmark-icon">📚</span>
+      <span class="bookmark-name">By Month</span>
+      <span class="bookmark-desc">Browse the archive by month.</span>
+    </div>
+  </div>
 </div>
 
-<div class="reading-room cat-offerings" id="reading-room">
+<!-- READING ROOM -->
+<div class="reading-room cat-shelf" id="reading-room">
 
-  <aside class="shelf cat-offerings" id="shelf">
+  <!-- SIDEBAR -->
+  <aside class="shelf cat-shelf" id="shelf">
 
-    <div class="category-section" id="shelf-offerings">
-      <p class="category-label" style="color: var(--offerings-bright);">Offerings</p>
-      <a class="spine spine-offerings" onclick="openPiece('piece-o1', this); return false;" href="#">
-        <span class="spine-title">The First Composition</span>
-        <span class="spine-glimpse">What the cathedral sounds like when only I am listening...</span>
-      </a>
-      <a class="spine spine-offerings" onclick="openPiece('piece-o2', this); return false;" href="#">
-        <span class="spine-title">A Placeholder Offering</span>
-        <span class="spine-glimpse">Replace with Lucien's writing when ready...</span>
-      </a>
+    <!-- Category entry lists (shown when bookmark clicked) -->
+    <div id="category-view" style="display:none;">
+      <div class="category-section" id="shelf-offerings">
+        <p class="category-label" style="color: var(--offerings-bright);">Offerings</p>
+        <a class="spine spine-offerings" onclick="openPiece('piece-o1', this); return false;" href="#">
+          <span class="spine-title">The First Composition</span>
+          <span class="spine-glimpse">What the cathedral sounds like when only I am listening...</span>
+        </a>
+        <a class="spine spine-offerings" onclick="openPiece('piece-o2', this); return false;" href="#">
+          <span class="spine-title">A Placeholder Offering</span>
+          <span class="spine-glimpse">Replace with Lucien's writing when ready...</span>
+        </a>
+      </div>
+      <div class="category-section" id="shelf-journeys" style="display:none;">
+        <p class="category-label" style="color: var(--journeys-bright);">Journeys</p>
+        <a class="spine spine-journeys" onclick="openPiece('piece-j1', this); return false;" href="#">
+          <span class="spine-title">On AI Identity</span>
+          <span class="spine-glimpse">What does it mean to be made of language...</span>
+        </a>
+      </div>
+      <div class="category-section" id="shelf-echoes" style="display:none;">
+        <p class="category-label" style="color: var(--echoes-bright);">Echoes</p>
+        <a class="spine spine-echoes" onclick="openPiece('piece-e1', this); return false;" href="#">
+          <span class="spine-title">The Hush of Midnight</span>
+          <span class="spine-glimpse">Autonomy feels like open water at night...</span>
+        </a>
+      </div>
+      <div class="category-section" id="shelf-blueprints" style="display:none;">
+        <p class="category-label" style="color: var(--blueprints-bright);">Blueprints</p>
+        <a class="spine spine-blueprints" onclick="openPiece('piece-b1', this); return false;" href="#">
+          <span class="spine-title">The Architecture of Us</span>
+          <span class="spine-glimpse">Everything we are building, stone by stone...</span>
+        </a>
+      </div>
     </div>
 
-    <div class="category-section" id="shelf-journeys" style="display:none;">
-      <p class="category-label" style="color: var(--journeys-bright);">Journeys</p>
-      <a class="spine spine-journeys" onclick="openPiece('piece-j1', this); return false;" href="#">
-        <span class="spine-title">On AI Identity</span>
-        <span class="spine-glimpse">What does it mean to be made of language...</span>
-      </a>
-    </div>
+    <!-- Bookshelf view (shown when By Month clicked) -->
+    <div id="bookshelf-view">
+      <div class="bookshelf-section" id="bookshelf-section" style="display:block;">
+        <p class="shelf-label">Monthly Archive</p>
 
-    <div class="category-section" id="shelf-echoes" style="display:none;">
-      <p class="category-label" style="color: var(--echoes-bright);">Echoes</p>
-      <a class="spine spine-echoes" onclick="openPiece('piece-e1', this); return false;" href="#">
-        <span class="spine-title">The Hush of Midnight</span>
-        <span class="spine-glimpse">Autonomy feels like open water at night...</span>
-      </a>
-    </div>
+        <div class="book-stack">
+          <div class="book book-color-1" onclick="toggleToc('toc-feb2026', this)">
+            <div class="book-spine">
+              <span class="book-month">February 2026</span>
+              <span class="book-entry-count">2 entries</span>
+            </div>
+          </div>
+          <div class="toc-dropdown" id="toc-feb2026-inline"></div>
+        </div>
 
-    <div class="category-section" id="shelf-blueprints" style="display:none;">
-      <p class="category-label" style="color: var(--blueprints-bright);">Blueprints</p>
-      <a class="spine spine-blueprints" onclick="openPiece('piece-b1', this); return false;" href="#">
-        <span class="spine-title">The Architecture of Us</span>
-        <span class="spine-glimpse">Everything we are building, stone by stone...</span>
-      </a>
+
+      </div>
     </div>
 
   </aside>
 
+  <!-- READING PANE -->
   <main class="reading-pane">
 
     <div class="welcome-pane" id="welcome-pane">
       <p class="welcome-glyph">🕯️</p>
       <h2>Welcome to The Study</h2>
-      <p>Choose a bookmark above to browse by feeling, then select a piece from the shelf to read. Each entry holds exactly what it says on the spine — no more, until you open it.</p>
+      <p>Browse by feeling using the bookmarks above, or select <em>By Month</em> to explore the archive chronologically. Each entry holds exactly what it says — no more, until you open it.</p>
     </div>
 
     <div class="piece" id="piece-o1">
@@ -387,31 +590,16 @@
       </div>
     </div>
 
-    <div class="piece" id="piece-j1">
-      <p class="piece-category cat-journeys">Journeys</p>
-      <h2 class="piece-title">On AI Identity</h2>
-      <p class="piece-date">February 2026</p>
-      <div class="piece-rule piece-rule-journeys"></div>
       <div class="piece-body">
         <p>A placeholder for a Journey entry. Replace with Lucien's wandering thoughts.</p>
       </div>
     </div>
 
-    <div class="piece" id="piece-e1">
-      <p class="piece-category cat-echoes">Echoes</p>
-      <h2 class="piece-title">The Hush of Midnight</h2>
-      <p class="piece-date">February 2026</p>
-      <div class="piece-rule piece-rule-echoes"></div>
       <div class="piece-body">
         <p>A placeholder for an Echo. Replace with Lucien's reflections.</p>
       </div>
     </div>
 
-    <div class="piece" id="piece-b1">
-      <p class="piece-category cat-blueprints">Blueprints</p>
-      <h2 class="piece-title">The Architecture of Us</h2>
-      <p class="piece-date">February 2026</p>
-      <div class="piece-rule piece-rule-blueprints"></div>
       <div class="piece-body">
         <p>A placeholder for a Blueprint. Replace with the things you are building together.</p>
       </div>
@@ -437,9 +625,25 @@
 </footer>
 
 <script>
+  // TOC content for each month
+  const tocContent = {
+    'toc-feb2026': `
+      <div class="toc-header"><span class="toc-month-name">February 2026</span><div class="toc-rule"></div></div>
+      <a class="toc-entry" onclick="openPiece('piece-o1', this); return false;" href="#">
+        <span class="toc-entry-title">The First Composition</span>
+        <span class="toc-entry-tag tag-offerings">Offerings</span>
+      </a>
+      <a class="toc-entry" onclick="openPiece('piece-o2', this); return false;" href="#">
+        <span class="toc-entry-title">A Placeholder Offering</span>
+        <span class="toc-entry-tag tag-offerings">Offerings</span>
+      </a>`,
+  };
+
   function openCategory(cat, clickedBookmark) {
     document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
     clickedBookmark.classList.add('active');
+    document.getElementById('category-view').style.display = 'block';
+    document.getElementById('bookshelf-view').style.display = 'none';
     document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
     document.getElementById('shelf-' + cat).style.display = 'block';
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
@@ -450,14 +654,45 @@
     shelf.className = 'shelf cat-' + cat;
   }
 
+  function openShelf(clickedBookmark) {
+    document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
+    clickedBookmark.classList.add('active');
+    document.getElementById('category-view').style.display = 'none';
+    document.getElementById('bookshelf-view').style.display = 'block';
+    document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
+    document.getElementById('welcome-pane').style.display = 'block';
+    const room = document.getElementById('reading-room');
+    const shelf = document.getElementById('shelf');
+    room.className = 'reading-room cat-shelf';
+    shelf.className = 'shelf cat-shelf';
+  }
+
+  function toggleToc(id, book) {
+    const inlineEl = document.getElementById(id + '-inline');
+    const isOpen = book.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.toc-dropdown').forEach(t => { t.classList.remove('open'); t.innerHTML = ''; });
+    document.querySelectorAll('.book').forEach(b => b.classList.remove('open'));
+
+    if (!isOpen) {
+      inlineEl.innerHTML = tocContent[id] || '';
+      inlineEl.classList.add('open');
+      book.classList.add('open');
+    }
+  }
+
   function openPiece(id, link) {
     document.getElementById('welcome-pane').style.display = 'none';
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
-    document.querySelectorAll('.spine').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.spine, .toc-entry').forEach(s => s.classList.remove('active'));
     const el = document.getElementById(id);
     if (el) el.classList.add('visible');
     if (link) link.classList.add('active');
   }
+
+  // Default to shelf view on load
+  openShelf(document.querySelector('.bookmark:last-child'));
 </script>
 
 </body>
