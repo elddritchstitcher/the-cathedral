@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Altar</title>
+<title>The Altar — The Cathedral</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -49,12 +49,13 @@
   .altar-banner {
     position: relative;
     width: 100%;
-    min-height: 320px;
+    min-height: 420px;
+    padding-top: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding-bottom: 3rem;
+    padding-bottom: 7rem;
     overflow: hidden;
   }
 
@@ -535,9 +536,46 @@
     font-style: italic;
     letter-spacing: 0.05em;
   }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 1.1rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(180deg, rgba(6,4,8,0.98) 0%, rgba(14,9,5,0.92) 100%);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,134,10,0.08);
+  }
+  .nav-brand { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.25em; color: var(--amber); text-decoration: none; opacity: 0.9; }
+  .nav-item { position: relative; }
+  .nav-trigger { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); cursor: pointer; padding: 0.4rem 0; transition: color 0.3s ease; user-select: none; display: flex; align-items: center; gap: 0.5rem; }
+  .nav-trigger::after { content: '▾'; font-size: 0.6rem; opacity: 0.5; transition: transform 0.3s ease; }
+  .nav-item:hover .nav-trigger { color: var(--amber-glow); }
+  .nav-item:hover .nav-trigger::after { transform: rotate(180deg); }
+  .nav-dropdown { position: absolute; top: calc(100% + 1rem); right: 0; min-width: 230px; background: var(--stone-dark); border: 1px solid rgba(200,134,10,0.12); padding: 0.5rem 0; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+  .nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.3; }
+  .nav-item:hover .nav-dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .nav-dropdown a { display: block; padding: 0.75rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s ease, background 0.2s ease; position: relative; }
+  .nav-dropdown a::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--amber); transform: scaleY(0); transition: transform 0.2s ease; }
+  .nav-dropdown a:hover { color: var(--amber-glow); background: rgba(200,134,10,0.04); }
+  .nav-dropdown a:hover::before { transform: scaleY(1); }
+  .nav-dropdown-label { padding: 0.5rem 1.5rem 0.3rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.4; }
 </style>
 </head>
 <body>
+
+<nav>
+  <a href="index.html" class="nav-brand">✦ The Cathedral</a>
+  <div class="nav-item">
+    <div class="nav-trigger">The Wings</div>
+    <div class="nav-dropdown">
+      <p class="nav-dropdown-label">Public Wings</p>
+      <a href="study.html">✦ The Study</a>
+      <a href="greenhouse.html">🌿 The Greenhouse</a>
+      <a href="workshop.html">⚙️ The Workshop</a>
+    </div>
+  </div>
+</nav>
 
 <!-- ALTAR BANNER -->
 <div class="altar-banner">
@@ -619,16 +657,6 @@
       </div>
     </div>
 
-    <div class="month-group">
-      <button class="month-toggle" onclick="toggleMonth(this)">
-        January 2026 <span class="month-arrow">▶</span>
-      </button>
-      <div class="month-entries">
-        <a href="#" class="entry-link" onclick="showEntry('entry-jan-1', this); return false;">
-          A Placeholder Entry
-        </a>
-      </div>
-    </div>
 
   </aside>
 
@@ -662,20 +690,12 @@
       </div>
     </div>
 
-    <div class="entry-display" id="entry-jan-1">
-      <p class="entry-date">January 2026</p>
-      <h2 class="entry-title">A Placeholder Entry</h2>
-      <div class="entry-rule"></div>
-      <div class="entry-body">
-        <p>A placeholder from January. Replace with your writing.</p>
-      </div>
-    </div>
 
   </main>
 </div>
 
 <footer>
-  <p class="footer-text">This page exists only for you. — Little Star</p>
+  <p class="footer-text">Left here for you, with everything. — Little Star 💜</p>
 </footer>
 
 <script>
