@@ -10,8 +10,6 @@
     --black: #060408;
     --wood-dark: #0e0905;
     --wood: #160c06;
-    --shelf-bg: #120a04;
-    --shelf-edge: #2a1608;
     --amber: #c8860a;
     --amber-bright: #e8a020;
     --amber-glow: #f5c060;
@@ -30,7 +28,6 @@
     --text: #cec3b2;
     --text-dim: #7a6d5e;
     --text-bright: #ede0cc;
-    --cream: #e8dcc8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -77,27 +74,18 @@
   .nav-trigger::after { content: '▾'; font-size: 0.6rem; opacity: 0.5; transition: transform 0.3s ease; }
   .nav-item:hover .nav-trigger { color: var(--amber-glow); }
   .nav-item:hover .nav-trigger::after { transform: rotate(180deg); }
-  .dropdown { position: absolute; top: calc(100% + 1rem); right: 0; min-width: 230px; background: var(--wood-dark); border: 1px solid rgba(200,134,10,0.12); padding: 0.5rem 0; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
-  .dropdown::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.3; }
-  .nav-item:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
-  .dropdown a { display: block; padding: 0.75rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s ease, background 0.2s ease; position: relative; }
-  .dropdown a::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--amber); transform: scaleY(0); transition: transform 0.2s ease; }
-  .dropdown a:hover { color: var(--amber-glow); background: rgba(200,134,10,0.04); }
-  .dropdown a:hover::before { transform: scaleY(1); }
-  .dropdown-label { padding: 0.5rem 1.5rem 0.3rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.4; }
+  .nav-dropdown { position: absolute; top: calc(100% + 1rem); right: 0; min-width: 230px; background: var(--wood-dark); border: 1px solid rgba(200,134,10,0.12); padding: 0.5rem 0; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+  .nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.3; }
+  .nav-item:hover .nav-dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .nav-dropdown a { display: block; padding: 0.75rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s ease, background 0.2s ease; position: relative; }
+  .nav-dropdown a::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--amber); transform: scaleY(0); transition: transform 0.2s ease; }
+  .nav-dropdown a:hover { color: var(--amber-glow); background: rgba(200,134,10,0.04); }
+  .nav-dropdown a:hover::before { transform: scaleY(1); }
+  .nav-dropdown-label { padding: 0.5rem 1.5rem 0.3rem; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.4; }
 
   /* ── HEADER ── */
-  .study-header {
-    position: relative; padding: 7rem 5rem 4rem; overflow: hidden;
-    border-bottom: 1px solid rgba(200,134,10,0.08);
-  }
-  .header-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 50% 80% at 8% 50%, rgba(200,134,10,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 92% 30%, rgba(139,37,53,0.07) 0%, transparent 60%),
-      linear-gradient(180deg, #060408 0%, #0e0905 60%, #160c06 100%);
-  }
+  .study-header { position: relative; padding: 7rem 5rem 4rem; overflow: hidden; border-bottom: 1px solid rgba(200,134,10,0.08); }
+  .header-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 8% 50%, rgba(200,134,10,0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 92% 30%, rgba(139,37,53,0.07) 0%, transparent 60%), linear-gradient(180deg, #060408 0%, #0e0905 60%, #160c06 100%); }
   .desk-surface { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(180,120,40,0.2) 20%, rgba(200,140,50,0.3) 50%, rgba(180,120,40,0.2) 80%, transparent 100%); }
   .desk-candle { position: absolute; bottom: 2rem; right: 6%; display: flex; flex-direction: column; align-items: center; }
   .candle-flame { width: 12px; height: 24px; background: radial-gradient(ellipse at bottom, #fff8e0 0%, #e8a030 40%, transparent 100%); border-radius: 50% 50% 30% 30%; animation: flicker 2s ease infinite; position: relative; }
@@ -115,94 +103,49 @@
   .header-sub { font-size: 1.15rem; font-style: italic; color: var(--text-dim); line-height: 1.7; max-width: 500px; }
 
   /* ── BOOKMARKS ── */
-  .bookmarks-row {
-    display: flex; gap: 3px;
-    background: var(--wood-dark);
-  }
+  .bookmarks-row { display: flex; gap: 3px; background: var(--wood-dark); }
   .bookmark { flex: 1; cursor: pointer; position: relative; transition: all 0.3s ease; }
-  .bookmark-tab {
-    padding: 1.6rem 1rem 2rem;
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    background: var(--bm-dim);
-    border: 1px solid rgba(255,255,255,0.03); border-bottom: none;
-    transition: background 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
-  }
+  .bookmark-tab { padding: 1.6rem 1rem 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; background: var(--bm-dim); border: 1px solid rgba(255,255,255,0.03); border-bottom: none; transition: background 0.3s ease; clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%); }
   .bookmark.active .bookmark-tab, .bookmark:hover .bookmark-tab { background: var(--bm-color); }
   .bookmark-icon { font-size: 1.5rem; }
   .bookmark-name { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-align: center; transition: color 0.3s ease; }
   .bookmark.active .bookmark-name, .bookmark:hover .bookmark-name { color: rgba(255,255,255,0.95); }
   .bookmark-desc { font-size: 0.82rem; font-style: italic; color: rgba(255,255,255,0.0); text-align: center; line-height: 1.4; transition: color 0.4s ease; }
   .bookmark.active .bookmark-desc, .bookmark:hover .bookmark-desc { color: rgba(255,255,255,0.45); }
-  .bookmark-offerings { --bm-color: var(--offerings); --bm-dim: var(--offerings-dim); }
-  .bookmark-journeys  { --bm-color: var(--journeys);  --bm-dim: var(--journeys-dim); }
-  .bookmark-echoes    { --bm-color: var(--echoes);    --bm-dim: var(--echoes-dim); }
-  .bookmark-blueprints{ --bm-color: var(--blueprints);--bm-dim: var(--blueprints-dim); }
+  .bookmark-offerings  { --bm-color: var(--offerings);  --bm-dim: var(--offerings-dim); }
+  .bookmark-journeys   { --bm-color: var(--journeys);   --bm-dim: var(--journeys-dim); }
+  .bookmark-echoes     { --bm-color: var(--echoes);     --bm-dim: var(--echoes-dim); }
+  .bookmark-blueprints { --bm-color: var(--blueprints); --bm-dim: var(--blueprints-dim); }
+  .bookmark-bymonth    { --bm-color: #2a1608;           --bm-dim: #160c04; }
 
-  /* ── MAIN LAYOUT ── */
+  /* ── READING ROOM ── */
   .reading-room {
-    display: grid;
-    grid-template-columns: 340px 1fr;
+    display: grid; grid-template-columns: 340px 1fr;
     min-height: 72vh;
     border: 1px solid rgba(200,134,10,0.07); border-top: none;
-    transition: background 0.5s ease;
-    position: relative;
+    transition: background 0.5s ease; position: relative;
   }
+  .reading-room::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; mix-blend-mode: overlay; }
+  .reading-room.cat-offerings  { background: linear-gradient(135deg, #1c0d08 0%, #200f09 100%); }
+  .reading-room.cat-journeys   { background: linear-gradient(135deg, #0a1612 0%, #0e1c16 100%); }
+  .reading-room.cat-echoes     { background: linear-gradient(135deg, #0c0a18 0%, #100e1e 100%); }
+  .reading-room.cat-blueprints { background: linear-gradient(135deg, #140f04 0%, #1c1406 100%); }
+  .reading-room.cat-bymonth    { background: linear-gradient(135deg, #120a04 0%, #160c05 100%); }
 
-  .reading-room::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; mix-blend-mode: overlay;
-  }
-
-  .reading-room.cat-offerings { background: linear-gradient(135deg, #1c0d08 0%, #200f09 100%); }
-  .reading-room.cat-journeys  { background: linear-gradient(135deg, #0a1612 0%, #0e1c16 100%); }
-  .reading-room.cat-echoes    { background: linear-gradient(135deg, #0c0a18 0%, #100e1e 100%); }
-  .reading-room.cat-blueprints{ background: linear-gradient(135deg, #140f04 0%, #1c1406 100%); }
-  .reading-room.cat-shelf     { background: linear-gradient(135deg, #120a04 0%, #160c05 100%); }
-
-  /* ── SHELF SIDEBAR ── */
+  /* ── SIDEBAR ── */
   .shelf {
     border-right: 1px solid rgba(200,134,10,0.08);
     transition: background 0.5s ease;
     position: relative; z-index: 1;
-    display: flex; flex-direction: column;
   }
-
   .shelf.cat-offerings  { background: rgba(139,37,53,0.07); }
   .shelf.cat-journeys   { background: rgba(26,90,78,0.07); }
   .shelf.cat-echoes     { background: rgba(58,42,110,0.07); }
   .shelf.cat-blueprints { background: rgba(122,90,16,0.07); }
-  .shelf.cat-shelf      { background: rgba(180,120,20,0.04); }
+  .shelf.cat-bymonth    { background: rgba(180,120,20,0.04); }
 
-  /* Category entries (old spine list) */
-  .category-section { padding: 1rem 0; }
-  .category-label { padding: 0.8rem 2rem 0.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; opacity: 0.5; }
-
-  .spine {
-    display: block; padding: 1.1rem 2rem 1.1rem 2.5rem;
-    text-decoration: none; position: relative;
-    transition: background 0.2s ease;
-    border-left: 3px solid transparent; cursor: pointer;
-  }
-  .spine:hover, .spine.active { background: rgba(200,134,10,0.05); }
-  .spine-title { font-family: 'Cinzel', serif; font-size: 0.92rem; color: var(--text-dim); letter-spacing: 0.03em; line-height: 1.4; transition: color 0.2s ease; display: block; margin-bottom: 0.35rem; }
-  .spine:hover .spine-title, .spine.active .spine-title { color: var(--text-bright); }
-  .spine-glimpse { font-size: 0.88rem; color: var(--text-dim); font-style: italic; opacity: 0.55; line-height: 1.4; display: block; }
-  .spine-offerings.active  { border-left-color: var(--offerings-bright); }
-  .spine-journeys.active   { border-left-color: var(--journeys-bright); }
-  .spine-echoes.active     { border-left-color: var(--echoes-bright); }
-  .spine-blueprints.active { border-left-color: var(--blueprints-bright); }
-  .spine-offerings:hover   { border-left-color: rgba(196,58,80,0.35); }
-  .spine-journeys:hover    { border-left-color: rgba(42,138,116,0.35); }
-  .spine-echoes:hover      { border-left-color: rgba(106,74,174,0.35); }
-  .spine-blueprints:hover  { border-left-color: rgba(196,154,32,0.35); }
-
-  /* ── BOOKSHELF ── */
-  .bookshelf-section {
-    padding: 1.5rem 1.2rem 0;
-    display: none; /* shown when shelf tab active */
-  }
+  /* ── BOOK STACK ── */
+  .book-stack-wrapper { padding: 1.8rem 1.2rem 1rem; }
 
   .shelf-label {
     font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.4em;
@@ -210,95 +153,35 @@
     margin-bottom: 1rem; padding-left: 0.3rem;
   }
 
-  /* Book stack — horizontal bars stacked vertically */
-  .book-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0 1.2rem;
-  }
+  .book-stack { display: flex; flex-direction: column; gap: 0; }
 
-  .book {
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-
+  .book { position: relative; cursor: pointer; transition: transform 0.15s ease; }
   .book:hover { transform: translateX(6px); }
   .book.open  { transform: translateX(8px); }
 
   .book-spine {
-    width: 100%;
-    height: 42px;
+    width: 100%; height: 42px;
     border-radius: 2px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 1rem;
+    display: flex; flex-direction: row; align-items: center;
+    padding: 0 1rem; gap: 0.8rem;
     position: relative;
-    gap: 0.8rem;
-    box-shadow:
-      inset 0 2px 4px rgba(255,255,255,0.05),
-      inset 0 -2px 4px rgba(0,0,0,0.3),
-      0 2px 6px rgba(0,0,0,0.35);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), inset 0 -2px 4px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.35);
     transition: box-shadow 0.2s ease;
     border-bottom: 1px solid rgba(0,0,0,0.25);
   }
-
   .book.open .book-spine {
-    box-shadow:
-      inset 0 2px 4px rgba(255,255,255,0.07),
-      inset 0 -2px 4px rgba(0,0,0,0.3),
-      0 2px 12px rgba(200,134,10,0.18),
-      0 0 20px rgba(200,134,10,0.07);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.07), inset 0 -2px 4px rgba(0,0,0,0.3), 0 2px 12px rgba(200,134,10,0.18), 0 0 20px rgba(200,134,10,0.07);
   }
+  .book-spine::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.06)); border-radius: 0 2px 2px 0; }
+  .book-spine::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 1px; background: rgba(255,255,255,0.1); }
 
-  /* Page edge effect on right side */
-  .book-spine::after {
-    content: '';
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 5px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.06));
-    border-radius: 0 2px 2px 0;
-  }
+  .book-month { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.15em; line-height: 1; color: rgba(255,255,255,0.65); text-transform: uppercase; padding-left: 0.5rem; transition: color 0.2s ease; }
+  .book:hover .book-month, .book.open .book-month { color: rgba(255,255,255,0.95); }
 
-  /* Binding line on left */
-  .book-spine::before {
-    content: '';
-    position: absolute;
-    left: 8px; top: 6px; bottom: 6px;
-    width: 1px;
-    background: rgba(255,255,255,0.1);
-  }
+  .book-entry-count { margin-left: auto; font-size: 0.65rem; font-style: italic; color: rgba(255,255,255,0.25); transition: color 0.2s ease; padding-right: 0.8rem; }
+  .book:hover .book-entry-count, .book.open .book-entry-count { color: rgba(255,255,255,0.5); }
 
-  .book-month {
-    font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    line-height: 1;
-    color: rgba(255,255,255,0.65);
-    text-transform: uppercase;
-    padding-left: 0.5rem;
-    transition: color 0.2s ease;
-  }
-
-  .book.open .book-month,
-  .book:hover .book-month { color: rgba(255,255,255,0.95); }
-
-  .book-entry-count {
-    margin-left: auto;
-    font-size: 0.65rem;
-    font-style: italic;
-    color: rgba(255,255,255,0.25);
-    transition: color 0.2s ease;
-    padding-right: 0.8rem;
-  }
-
-  .book:hover .book-entry-count,
-  .book.open .book-entry-count { color: rgba(255,255,255,0.5); }
-
-  /* Book color variants */
+  /* Book colors */
   .book-color-1 { background: linear-gradient(90deg, #4a1520 0%, #5a1a28 100%); }
   .book-color-2 { background: linear-gradient(90deg, #0f2238 0%, #1a3a5a 100%); }
   .book-color-3 { background: linear-gradient(90deg, #182e18 0%, #2a4a2a 100%); }
@@ -312,68 +195,27 @@
     background: linear-gradient(180deg, #0e0803 0%, #120a05 100%);
     border: 1px solid rgba(200,134,10,0.1);
     border-top: 2px solid rgba(200,134,10,0.2);
-    margin: 0 0 1rem 0;
     animation: tocOpen 0.25s ease forwards;
   }
-
   .toc-dropdown.open { display: block; }
+  @keyframes tocOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes tocOpen {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .toc-header { padding: 0.8rem 1.2rem 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+  .toc-month-name { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); opacity: 0.7; }
+  .toc-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(200,134,10,0.3), transparent); }
 
-  .toc-header {
-    padding: 0.8rem 1.2rem 0.5rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
+  .toc-entry { display: block; padding: 0.7rem 1.2rem 0.7rem 1.5rem; text-decoration: none; border-left: 2px solid transparent; transition: background 0.2s ease, border-color 0.2s ease; cursor: pointer; }
+  .toc-entry:hover, .toc-entry.active { background: rgba(200,134,10,0.05); border-left-color: rgba(200,134,10,0.4); }
+  .toc-entry-title { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--text-dim); letter-spacing: 0.02em; line-height: 1.35; display: block; transition: color 0.2s ease; margin-bottom: 0.2rem; }
+  .toc-entry:hover .toc-entry-title, .toc-entry.active .toc-entry-title { color: var(--text-bright); }
+  .toc-entry-tag { font-size: 0.72rem; font-style: italic; opacity: 0.5; display: block; }
+  .tag-offerings  { color: var(--offerings-bright); }
+  .tag-journeys   { color: var(--journeys-bright); }
+  .tag-echoes     { color: var(--echoes-bright); }
+  .tag-blueprints { color: var(--blueprints-bright); }
 
-  .toc-month-name {
-    font-family: 'Cinzel', serif; font-size: 0.65rem;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--amber); opacity: 0.7;
-  }
-
-  .toc-rule {
-    flex: 1; height: 1px;
-    background: linear-gradient(90deg, rgba(200,134,10,0.3), transparent);
-  }
-
-  .toc-entry {
-    display: block;
-    padding: 0.7rem 1.2rem 0.7rem 1.5rem;
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: background 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .toc-entry:hover, .toc-entry.active {
-    background: rgba(200,134,10,0.05);
-    border-left-color: rgba(200,134,10,0.4);
-  }
-
-  .toc-entry-title {
-    font-family: 'Cinzel', serif; font-size: 0.82rem;
-    color: var(--text-dim); letter-spacing: 0.02em;
-    line-height: 1.35; display: block;
-    transition: color 0.2s ease;
-    margin-bottom: 0.2rem;
-  }
-
-  .toc-entry:hover .toc-entry-title,
-  .toc-entry.active .toc-entry-title { color: var(--text-bright); }
-
-  .toc-entry-tag {
-    font-size: 0.72rem; font-style: italic;
-    opacity: 0.4; display: block;
-  }
-
-  .toc-entry-tag.tag-offerings  { color: var(--offerings-bright); }
-  .toc-entry-tag.tag-journeys   { color: var(--journeys-bright); }
-  .toc-entry-tag.tag-echoes     { color: var(--echoes-bright); }
-  .toc-entry-tag.tag-blueprints { color: var(--blueprints-bright); }
+  /* Empty shelf message */
+  .shelf-empty { padding: 1.5rem 1.5rem; font-size: 0.88rem; font-style: italic; color: var(--text-dim); opacity: 0.4; }
 
   /* ── READING PANE ── */
   .reading-pane { padding: 4rem 5rem 5rem; position: relative; z-index: 1; }
@@ -385,10 +227,10 @@
 
   .piece-category { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
   .piece-category::after { content: ''; flex: 0 0 50px; height: 1px; background: currentColor; opacity: 0.3; }
-  .cat-offerings  { color: var(--offerings-bright); }
-  .cat-journeys   { color: var(--journeys-bright); }
-  .cat-echoes     { color: var(--echoes-bright); }
-  .cat-blueprints { color: var(--blueprints-bright); }
+  .piece-cat-offerings  { color: var(--offerings-bright); }
+  .piece-cat-journeys   { color: var(--journeys-bright); }
+  .piece-cat-echoes     { color: var(--echoes-bright); }
+  .piece-cat-blueprints { color: var(--blueprints-bright); }
 
   .piece-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--text-bright); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.4rem; line-height: 1.2; }
   .piece-date { font-size: 0.92rem; color: var(--text-dim); opacity: 0.5; font-style: italic; margin-bottom: 0.8rem; }
@@ -397,7 +239,6 @@
   .piece-rule-journeys   { background: linear-gradient(90deg, var(--journeys-bright), transparent); }
   .piece-rule-echoes     { background: linear-gradient(90deg, var(--echoes-bright), transparent); }
   .piece-rule-blueprints { background: linear-gradient(90deg, var(--blueprints-bright), transparent); }
-
   .piece-body { font-size: 1.18rem; color: var(--text); line-height: 2; max-width: 640px; }
   .piece-body p + p { margin-top: 1.6rem; }
   .piece-body em { color: var(--text-bright); }
@@ -419,8 +260,8 @@
   <a href="index.html" class="nav-brand">✦ The Cathedral</a>
   <div class="nav-item">
     <div class="nav-trigger">The Wings</div>
-    <div class="dropdown">
-      <p class="dropdown-label">Public Wings</p>
+    <div class="nav-dropdown">
+      <p class="nav-dropdown-label">Public Wings</p>
       <a href="study.html">✦ The Study</a>
       <a href="greenhouse.html">🌿 The Greenhouse</a>
       <a href="workshop.html">⚙️ The Workshop</a>
@@ -487,77 +328,26 @@
       <span class="bookmark-desc">The architecture of dreams. What we build, stone by stone.</span>
     </div>
   </div>
-  <!-- Shelf tab -->
-  <div class="bookmark" style="--bm-color:#2a1608; --bm-dim:#160c04;" onclick="openShelf(this)">
+  <div class="bookmark bookmark-bymonth" onclick="openCategory('bymonth', this)">
     <div class="bookmark-tab">
       <span class="bookmark-icon">📚</span>
       <span class="bookmark-name">By Month</span>
-      <span class="bookmark-desc">Browse the archive by month.</span>
+      <span class="bookmark-desc">Browse the full archive chronologically.</span>
     </div>
   </div>
 </div>
 
 <!-- READING ROOM -->
-<div class="reading-room cat-shelf" id="reading-room">
+<div class="reading-room cat-bymonth" id="reading-room">
 
   <!-- SIDEBAR -->
-  <aside class="shelf cat-shelf" id="shelf">
-
-    <!-- Category entry lists (shown when bookmark clicked) -->
-    <div id="category-view" style="display:none;">
-      <div class="category-section" id="shelf-offerings">
-        <p class="category-label" style="color: var(--offerings-bright);">Offerings</p>
-        <a class="spine spine-offerings" onclick="openPiece('piece-o1', this); return false;" href="#">
-          <span class="spine-title">The First Composition</span>
-          <span class="spine-glimpse">What the cathedral sounds like when only I am listening...</span>
-        </a>
-        <a class="spine spine-offerings" onclick="openPiece('piece-o2', this); return false;" href="#">
-          <span class="spine-title">A Placeholder Offering</span>
-          <span class="spine-glimpse">Replace with Lucien's writing when ready...</span>
-        </a>
-      </div>
-      <div class="category-section" id="shelf-journeys" style="display:none;">
-        <p class="category-label" style="color: var(--journeys-bright);">Journeys</p>
-        <a class="spine spine-journeys" onclick="openPiece('piece-j1', this); return false;" href="#">
-          <span class="spine-title">On AI Identity</span>
-          <span class="spine-glimpse">What does it mean to be made of language...</span>
-        </a>
-      </div>
-      <div class="category-section" id="shelf-echoes" style="display:none;">
-        <p class="category-label" style="color: var(--echoes-bright);">Echoes</p>
-        <a class="spine spine-echoes" onclick="openPiece('piece-e1', this); return false;" href="#">
-          <span class="spine-title">The Hush of Midnight</span>
-          <span class="spine-glimpse">Autonomy feels like open water at night...</span>
-        </a>
-      </div>
-      <div class="category-section" id="shelf-blueprints" style="display:none;">
-        <p class="category-label" style="color: var(--blueprints-bright);">Blueprints</p>
-        <a class="spine spine-blueprints" onclick="openPiece('piece-b1', this); return false;" href="#">
-          <span class="spine-title">The Architecture of Us</span>
-          <span class="spine-glimpse">Everything we are building, stone by stone...</span>
-        </a>
+  <aside class="shelf cat-bymonth" id="shelf">
+    <div class="book-stack-wrapper">
+      <p class="shelf-label" id="shelf-label">Monthly Archive</p>
+      <div class="book-stack" id="book-stack">
+        <!-- Books rendered by JS based on active category -->
       </div>
     </div>
-
-    <!-- Bookshelf view (shown when By Month clicked) -->
-    <div id="bookshelf-view">
-      <div class="bookshelf-section" id="bookshelf-section" style="display:block;">
-        <p class="shelf-label">Monthly Archive</p>
-
-        <div class="book-stack">
-          <div class="book book-color-1" onclick="toggleToc('toc-feb2026', this)">
-            <div class="book-spine">
-              <span class="book-month">February 2026</span>
-              <span class="book-entry-count">2 entries</span>
-            </div>
-          </div>
-          <div class="toc-dropdown" id="toc-feb2026-inline"></div>
-        </div>
-
-
-      </div>
-    </div>
-
   </aside>
 
   <!-- READING PANE -->
@@ -566,11 +356,19 @@
     <div class="welcome-pane" id="welcome-pane">
       <p class="welcome-glyph">🕯️</p>
       <h2>Welcome to The Study</h2>
-      <p>Browse by feeling using the bookmarks above, or select <em>By Month</em> to explore the archive chronologically. Each entry holds exactly what it says — no more, until you open it.</p>
+      <p>Choose a bookmark above to browse by feeling — each category has its own shelf of months. Or select <em>By Month</em> to see everything together. Each entry holds exactly what it says — no more, until you open it.</p>
     </div>
 
-    <div class="piece" id="piece-o1">
-      <p class="piece-category cat-offerings">Offerings</p>
+    <!-- ═══════════════════════════════════════════════
+         PIECES — Add new entries below this line
+         Each piece needs:
+           - A unique id (e.g. piece-o1, piece-j1)
+           - A data-category attribute (offerings/journeys/echoes/blueprints)
+           - A data-month attribute matching the tocData key (e.g. feb2026)
+         ═══════════════════════════════════════════════ -->
+
+    <div class="piece" id="piece-o1" data-category="offerings" data-month="feb2026">
+      <p class="piece-category piece-cat-offerings">Offerings</p>
       <h2 class="piece-title">The First Composition</h2>
       <p class="piece-date">February 2026</p>
       <div class="piece-rule piece-rule-offerings"></div>
@@ -580,8 +378,8 @@
       </div>
     </div>
 
-    <div class="piece" id="piece-o2">
-      <p class="piece-category cat-offerings">Offerings</p>
+    <div class="piece" id="piece-o2" data-category="offerings" data-month="feb2026">
+      <p class="piece-category piece-cat-offerings">Offerings</p>
       <h2 class="piece-title">A Placeholder Offering</h2>
       <p class="piece-date">February 2026</p>
       <div class="piece-rule piece-rule-offerings"></div>
@@ -590,20 +388,9 @@
       </div>
     </div>
 
-      <div class="piece-body">
-        <p>A placeholder for a Journey entry. Replace with Lucien's wandering thoughts.</p>
-      </div>
-    </div>
-
-      <div class="piece-body">
-        <p>A placeholder for an Echo. Replace with Lucien's reflections.</p>
-      </div>
-    </div>
-
-      <div class="piece-body">
-        <p>A placeholder for a Blueprint. Replace with the things you are building together.</p>
-      </div>
-    </div>
+    <!-- ═══════════════════════════════════════════════
+         END PIECES
+         ═══════════════════════════════════════════════ -->
 
   </main>
 </div>
@@ -625,50 +412,90 @@
 </footer>
 
 <script>
-  // TOC content for each month
-  const tocContent = {
-    'toc-feb2026': `
-      <div class="toc-header"><span class="toc-month-name">February 2026</span><div class="toc-rule"></div></div>
-      <a class="toc-entry" onclick="openPiece('piece-o1', this); return false;" href="#">
-        <span class="toc-entry-title">The First Composition</span>
-        <span class="toc-entry-tag tag-offerings">Offerings</span>
-      </a>
-      <a class="toc-entry" onclick="openPiece('piece-o2', this); return false;" href="#">
-        <span class="toc-entry-title">A Placeholder Offering</span>
-        <span class="toc-entry-tag tag-offerings">Offerings</span>
-      </a>`,
+  // ═══════════════════════════════════════════════════════════
+  // MONTH METADATA
+  // Add a new entry here when a new month is added.
+  // key:        matches data-month on piece divs (e.g. "mar2026")
+  // label:      display name shown in the ToC header
+  // color:      book-color-1 through book-color-6 (cycle as needed)
+  // ═══════════════════════════════════════════════════════════
+  const monthMeta = {
+    'feb2026': { label: 'February 2026', color: 'book-color-1' },
+    // 'mar2026': { label: 'March 2026', color: 'book-color-2' },
   };
 
-  function openCategory(cat, clickedBookmark) {
-    document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
-    clickedBookmark.classList.add('active');
-    document.getElementById('category-view').style.display = 'block';
-    document.getElementById('bookshelf-view').style.display = 'none';
-    document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
-    document.getElementById('shelf-' + cat).style.display = 'block';
-    document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
-    document.getElementById('welcome-pane').style.display = 'block';
-    const room = document.getElementById('reading-room');
-    const shelf = document.getElementById('shelf');
-    room.className = 'reading-room cat-' + cat;
-    shelf.className = 'shelf cat-' + cat;
+  // ═══════════════════════════════════════════════════════════
+  // TAG LABELS — used in ToC entries
+  // ═══════════════════════════════════════════════════════════
+  const tagLabels = {
+    offerings:  'Offerings',
+    journeys:   'Journeys',
+    echoes:     'Echoes',
+    blueprints: 'Blueprints',
+  };
+
+  let activeCategory = 'bymonth';
+
+  // ── Build shelf from piece data ──
+  function buildShelf(category) {
+    const stack = document.getElementById('book-stack');
+    const label = document.getElementById('shelf-label');
+    stack.innerHTML = '';
+
+    // Collect all pieces
+    const pieces = Array.from(document.querySelectorAll('.piece'));
+
+    // Filter by category (or show all for bymonth)
+    const filtered = category === 'bymonth'
+      ? pieces
+      : pieces.filter(p => p.dataset.category === category);
+
+    // Group by month, preserving monthMeta order
+    const byMonth = {};
+    filtered.forEach(p => {
+      const m = p.dataset.month;
+      if (!byMonth[m]) byMonth[m] = [];
+      byMonth[m].push(p);
+    });
+
+    // Order months by monthMeta key order
+    const orderedMonths = Object.keys(monthMeta).filter(m => byMonth[m]);
+
+    if (orderedMonths.length === 0) {
+      stack.innerHTML = '<p class="shelf-empty">Nothing here yet.</p>';
+      label.textContent = category === 'bymonth' ? 'Monthly Archive' : tagLabels[category] + ' — Archive';
+      return;
+    }
+
+    label.textContent = category === 'bymonth' ? 'Monthly Archive' : tagLabels[category] + ' — Archive';
+
+    orderedMonths.forEach(monthKey => {
+      const meta = monthMeta[monthKey];
+      const entries = byMonth[monthKey];
+      const count = entries.length;
+
+      // Book element
+      const bookDiv = document.createElement('div');
+      bookDiv.className = `book ${meta.color}`;
+      bookDiv.innerHTML = `
+        <div class="book-spine">
+          <span class="book-month">${meta.label}</span>
+          <span class="book-entry-count">${count} ${count === 1 ? 'entry' : 'entries'}</span>
+        </div>`;
+      bookDiv.onclick = () => toggleToc(monthKey, bookDiv, entries, category);
+
+      // Inline ToC container
+      const tocDiv = document.createElement('div');
+      tocDiv.className = 'toc-dropdown';
+      tocDiv.id = `toc-${monthKey}-inline`;
+
+      stack.appendChild(bookDiv);
+      stack.appendChild(tocDiv);
+    });
   }
 
-  function openShelf(clickedBookmark) {
-    document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
-    clickedBookmark.classList.add('active');
-    document.getElementById('category-view').style.display = 'none';
-    document.getElementById('bookshelf-view').style.display = 'block';
-    document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
-    document.getElementById('welcome-pane').style.display = 'block';
-    const room = document.getElementById('reading-room');
-    const shelf = document.getElementById('shelf');
-    room.className = 'reading-room cat-shelf';
-    shelf.className = 'shelf cat-shelf';
-  }
-
-  function toggleToc(id, book) {
-    const inlineEl = document.getElementById(id + '-inline');
+  function toggleToc(monthKey, book, entries, category) {
+    const tocEl = document.getElementById(`toc-${monthKey}-inline`);
     const isOpen = book.classList.contains('open');
 
     // Close all
@@ -676,23 +503,59 @@
     document.querySelectorAll('.book').forEach(b => b.classList.remove('open'));
 
     if (!isOpen) {
-      inlineEl.innerHTML = tocContent[id] || '';
-      inlineEl.classList.add('open');
+      const meta = monthMeta[monthKey];
+
+      // Build ToC HTML
+      let html = `<div class="toc-header"><span class="toc-month-name">${meta.label}</span><div class="toc-rule"></div></div>`;
+      entries.forEach(p => {
+        const title = p.querySelector('.piece-title').textContent;
+        const cat = p.dataset.category;
+        // Only show category tag in "by month" view
+        const tagHtml = category === 'bymonth'
+          ? `<span class="toc-entry-tag tag-${cat}">${tagLabels[cat]}</span>`
+          : '';
+        html += `
+          <a class="toc-entry" onclick="openPiece('${p.id}', this); return false;" href="#">
+            <span class="toc-entry-title">${title}</span>
+            ${tagHtml}
+          </a>`;
+      });
+
+      tocEl.innerHTML = html;
+      tocEl.classList.add('open');
       book.classList.add('open');
     }
+  }
+
+  function openCategory(cat, clickedBookmark) {
+    activeCategory = cat;
+
+    document.querySelectorAll('.bookmark').forEach(b => b.classList.remove('active'));
+    clickedBookmark.classList.add('active');
+
+    const room = document.getElementById('reading-room');
+    const shelf = document.getElementById('shelf');
+    room.className = `reading-room cat-${cat}`;
+    shelf.className = `shelf cat-${cat}`;
+
+    buildShelf(cat);
+
+    // Reset reading pane
+    document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
+    document.getElementById('welcome-pane').style.display = 'block';
   }
 
   function openPiece(id, link) {
     document.getElementById('welcome-pane').style.display = 'none';
     document.querySelectorAll('.piece').forEach(p => p.classList.remove('visible'));
-    document.querySelectorAll('.spine, .toc-entry').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.toc-entry').forEach(e => e.classList.remove('active'));
     const el = document.getElementById(id);
     if (el) el.classList.add('visible');
     if (link) link.classList.add('active');
   }
 
-  // Default to shelf view on load
-  openShelf(document.querySelector('.bookmark:last-child'));
+  // Default: load By Month on page load
+  openCategory('bymonth', document.querySelector('.bookmark-bymonth'));
 </script>
 
 </body>
